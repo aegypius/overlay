@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<layman>
+   <overlay
+      type    = "git"
+      src     = "https://aegypius@github.com/aegypius/overlay.git"
+      contact = ""
+      status  = "unofficial"
+      name    = "aegypius">
+      <link>http://github.com/aegypius/overlay/wiki</link>
+      <description>aegypius personal overlay</description>
+   </overlay>
+</layman>
