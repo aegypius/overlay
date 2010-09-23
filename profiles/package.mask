@@ -1,0 +1,5 @@
+# aegypius              (23 Sept 2010)
+# Aptana Software Update does not work
+=dev-util/aptana-studio-bin-2*
+=dev-util/aptana-studio-bin-3*
+
