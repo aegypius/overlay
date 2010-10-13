@@ -6,3 +6,8 @@
 # aegypius               (05 Oct 2010)
 # Hotot oAuth authorization is broken
 # =net-misc/hotot-9999
+
+# aegypius               (11 Oct 2010)
+# Live ebuild is broken
+=gnome-extra/gnome-globalmenu-9999
+

@@ -1,0 +1,14 @@
+--- a/libgnomenu/Makefile.am	2009-10-12 02:19:48.000000000 +0200
++++ b/libgnomenu/Makefile.am	2009-10-12 02:17:55.000000000 +0200
+@@ -36,7 +36,10 @@
+ 			 -include $(CONFIG_HEADER) \
+ 			 -include ../legacy-support/legacy-support.h
+ 
+-libgnomenu_la_LIBADD = ../legacy-support/liblegacy-support.la
++libgnomenu_la_LIBADD = ../legacy-support/liblegacy-support.la \
++			 $(GTK_LIBS) \
++			 $(WNCK_LIBS) \
++			 $(X11_LIBS)
+ 
+ libgnomenu_la_LDFLAGS = -version-info 2:0:0 -release $(VERSION) -Wl,--as-needed
+ 
