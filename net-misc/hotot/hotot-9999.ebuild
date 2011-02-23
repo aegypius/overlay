@@ -23,6 +23,7 @@ RDEPEND="
    dev-python/pywebkitgtk
    dev-python/notify-python
    dev-python/keybinder
+   dev-python/python-distutils-extra
 "
 
 src_compile() {
