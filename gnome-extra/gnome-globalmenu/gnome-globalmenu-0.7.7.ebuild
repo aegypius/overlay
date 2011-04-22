@@ -1,1 +1,0 @@
-gnome-globalmenu-9999.ebuild

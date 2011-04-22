@@ -6,16 +6,21 @@ EAPI=3
 PYTHON_DEPEND="2:2.6"
 SUPPORT_PYTHON_ABIS="1"
 
-inherit distutils
+inherit distutils bzr
 
-DESCRIPTION="Mustache in Python."
-HOMEPAGE="http://mustache.github.com/"
-SRC_URI="http://pypi.python.org/packages/source/p/${PN}/${P}.tar.gz"
+DESCRIPTION="A Simple Python DAAP server."
+HOMEPAGE="https://launchpad.net/spydaap"
+EBZR_REPO_URI="lp:spydaap"
 
-LICENSE="BSD"
-SLOT="0"
+
+LICENSE="GPL"
+SLOT="live"
 KEYWORDS="~amd64 ~x86"
 IUSE="doc"
 
 DEPEND="dev-python/setuptools"
 RDEPEND="${DEPEND}"
+
+src_unpack() {
+	bzr_src_unpack;
+}
