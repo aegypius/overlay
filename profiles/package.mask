@@ -3,11 +3,3 @@
 =dev-util/aptana-studio-bin-2*
 =dev-util/aptana-studio-bin-3*
 
-# aegypius               (05 Oct 2010)
-# Hotot oAuth authorization is broken
-# =net-misc/hotot-9999
-
-# aegypius               (13 Oct 2010)
-# eGTK 1.2 seems broken
-=x11-themes/gnome-themes-egtk-1.2
-
