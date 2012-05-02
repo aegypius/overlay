@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=org.freedesktop.Notifications
-Exec=/bin/sh -c "if [ $GDMSESSION = gnome-stracciatella ]; then exec /usr/lib/notification-daemon/notification-daemon; else exec @LIBEXECDIR@/notify-osd; fi"
