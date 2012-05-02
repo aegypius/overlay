@@ -17,8 +17,8 @@ KEYWORDS=""
 RDEPEND="
 	dev-libs/libgee
 	dev-libs/glib:2
-	dev-libs/gmime:2.4
-	dev-libs/sqlheavy
+	dev-libs/gmime:2.6
+	=dev-libs/sqlheavy-0.1.1
 	gnome-base/gnome-keyring
 	x11-libs/gtk+:3
 	dev-db/sqlite:3
