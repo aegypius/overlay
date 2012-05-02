@@ -40,7 +40,7 @@ src_unpack() {
 }
 
 src_configure() {
-	mycmakeargs="-DGSETTINGS_COMPILE=OFF"
+	mycmakeargs="-DGSETTINGS_COMPILE=OFF -DICON_UPDATE=OFF -DDESKTOP_UPDATE=OFF"
 	cmake-utils_src_configure
 }
 
