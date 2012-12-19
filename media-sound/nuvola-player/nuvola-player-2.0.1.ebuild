@@ -16,12 +16,12 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="debug"
 
-VALA_REQUIRED_VERSION="0.16"
+VALA_REQUIRED_VERSION="0.18"
 
 RDEPEND="www-plugins/adobe-flash
         "
 DEPEND="${RDEPEND}
-        >=dev-lang/vala-0.16
+        dev-lang/vala:0.18
         dev-util/intltool
         >=net-libs/libsoup-2.34
         >=x11-libs/gtk+-3.0
@@ -41,9 +41,7 @@ src_compile(){
 
 src_install(){
     ./waf install
-    make_desktop_entry "/usr/bin/${MY_P}" "Nuvola Player" "/usr/share/icons/hicolor/64x64/apps/${MY_P}.png" "AudioVideo;Audio;Network;"
+	rm "${D}/usr/share/applications/nuvolaplayer.desktop";
+    make_desktop_entry "/usr/bin/${MY_P}" "Nuvola Player" "/usr/share/icons/hicolor/64x64/apps/${MY_P}.png" "AudioVideo"
 }
 
-pkg_postinst() {
-    rm /usr/share/applications/nuvolaplayer.desktop
-}
