@@ -6,8 +6,9 @@ EAPI="4"
 
 inherit eutils versionator
 
-MY_V=$(get_version_component_range 1-2)
+MY_V=$(get_version_component_range 1-3)
 MY_P="Sublime%20Text"
+MY_T=/opt/${PN}
 S="${WORKDIR}/Sublime Text 2"
 
 DESCRIPTION="Sublime Text is a sophisticated text editor for code, html and prose"
@@ -16,7 +17,7 @@ COMMON_URI="http://c758482.r82.cf2.rackcdn.com"
 SRC_URI="amd64? ( ${COMMON_URI}/${MY_P}%20${MY_V}%20x64.tar.bz2 )
          x86?   ( ${COMMON_URI}/${MY_P}%20${MY_V}.tar.bz2 )"
 LICENSE="Sublime"
-SLOT="0"
+SLOT="2"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="mirror"
@@ -24,17 +25,17 @@ RESTRICT="mirror"
 RDEPEND="media-libs/libpng:1.2
 	     >=x11-libs/gtk+-2.24.8-r1:2"
 
+
 src_install() {
-	insinto /opt/${PN}
-	into /opt/${PN}
-	exeinto /opt/${PN}
+	insinto ${MY_T}
+	into    ${MY_T}
+	exeinto ${MY_T}
 	doins -r "Icon"
 	doins -r "lib"
 	doins -r "Pristine Packages"
 	doins "sublime_plugin.py"
 	doins "PackageSetup.py"
 	doexe "sublime_text"
-	dosym "/opt/${PN}/sublime_text" /usr/bin/subl
-	make_desktop_entry "subl" "Sublime Text Editor"	"/opt/${PN}/Icon/256x256/sublime_text.png" "Application;TextEditor"
-
+	dosym "${MY_T}/sublime_text" /usr/bin/sublime
+	make_desktop_entry "/usr/bin/sublime %U" "Sublime Text ${PV}" "${MY_T}/Icon/256x256/sublime_text.png" "Application;TextEditor"
 }
