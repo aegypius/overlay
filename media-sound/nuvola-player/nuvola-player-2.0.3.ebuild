@@ -14,7 +14,7 @@ SRC_URI="https://launchpad.net/${PN}/2.0.x/${PV}/+download/${MY_P}-${PV}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="debug"
+IUSE=""
 RESTRICT="mirror"
 
 VALA_REQUIRED_VERSION="0.18"
