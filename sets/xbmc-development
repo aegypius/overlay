@@ -1,0 +1,3 @@
+media-tv/xbmc
+>=dev-python/virtualenv-1.10
+>=dev-python/virtualenvwrapper-4.0
