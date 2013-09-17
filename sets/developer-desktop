@@ -1,3 +1,4 @@
 @gnome-desktop
 app-editors/sublime-text:3
 dev-vcs/git
+dev-util/meld
