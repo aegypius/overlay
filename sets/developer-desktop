@@ -2,3 +2,4 @@
 app-editors/sublime-text:3
 dev-vcs/git
 dev-util/meld
+>=media-fonts/source-pro-20130316
