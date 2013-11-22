@@ -1,1 +1,2 @@
 move app-editors/adobe-brackets app-editors/brackets
+move dev-vcs/git-flow dev-vcs/gitflow

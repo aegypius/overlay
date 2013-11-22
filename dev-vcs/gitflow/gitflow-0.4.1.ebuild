@@ -18,7 +18,7 @@ IUSE=""
 
 RDEPEND="dev-vcs/git"
 DEPEND="${RDEPEND}"
-
+RESTRICT="mirror"
 
 DOCS="AUTHORS LICENSE README Readme.md History.md"
 
@@ -39,5 +39,5 @@ src_compile() {
 
 src_install() {
 	emake prefix="${D}/usr" install
-	newbashcomp "${FILESDIR}/${PN}.bash-completion" ${PN}
+	newbashcomp "${FILESDIR}/${PN}-${PV}.bash-completion" ${PN}
 }
