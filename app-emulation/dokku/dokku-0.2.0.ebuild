@@ -97,7 +97,7 @@ pkg_postinst() {
     elog " does not set them up.                               "
     elog "                                                     "
     elog " To do so run :                                      "
-    elog "   curl https://s3.amazonaws.com/progrium-dokku/progrium_buildstep_79cf6805cf.tgz | gunzip -cd | docker import - progrium/buildstep"
-    elog ""
+    elog "   docker pull progrium/buildstep                    "
+    elog "                                                     "
     elog " *************************************************** "
 }
