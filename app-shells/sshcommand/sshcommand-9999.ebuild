@@ -31,10 +31,6 @@ src_unpack() {
     git-2_src_unpack
 }
 
-src_prepare() {
-	epatch ${FILESDIR}/0001-Test-if-user-exists-before-trying-to-create-it.patch
-}
-
 src_install() {
     exeinto /usr/bin
     doexe sshcommand
