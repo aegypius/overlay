@@ -1,0 +1,11 @@
+--- dokku.orig	2013-12-19 13:41:41.000000000 +0100
++++ dokku	2013-12-19 13:42:16.000000000 +0100
+@@ -106,7 +106,7 @@
+     ;;
+
+   *)
+-    for script in $(ls -d /var/lib/dokku/plugins/*/commands); do
++    for script in $(ls -d ${PLUGIN_PATH}/*/commands); do
+       $script "$@"
+     done
+     ;;

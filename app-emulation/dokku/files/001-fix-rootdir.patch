@@ -1,0 +1,10 @@
+--- dokku.orig	2013-12-19 13:38:46.000000000 +0100
++++ dokku	2013-12-19 13:39:02.000000000 +0100
+@@ -1,6 +1,6 @@
+ #!/usr/bin/env bash
+ set -eo pipefail
+-export DOKKU_ROOT=${DOKKU_ROOT:="/home/dokku"}
++export DOKKU_ROOT=${DOKKU_ROOT:="/var/lib/dokku"}
+ export PLUGIN_PATH=${PLUGIN_PATH:="/var/lib/dokku/plugins"}
+
+ [[ -f $DOKKU_ROOT/dokkurc ]] && source $DOKKU_ROOT/dokkurc
