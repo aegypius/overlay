@@ -20,7 +20,7 @@ inherit git-2 user
 
 LICENSE="MIT"
 SLOT="0"
-IUSE="openrc systemd"
+IUSE="+buildstep"
 
 DEPEND="
 	app-emulation/docker
@@ -30,8 +30,6 @@ DEPEND="
 RDEPEND="${DEPEND}
 	app-shells/bash
 	app-admin/sudo
-	openrc? ( sys-apps/openrc )
-	systemd? ( sys-apps/systemd )
 "
 
 src_unpack() {
@@ -41,6 +39,9 @@ src_unpack() {
 pkg_setup() {
 	enewgroup ${PN}
 	enewuser  ${PN} -1 /bin/sh /var/lib/${PN} ${PN}
+	if use buildstep; then
+		$(gpasswd --add portage docker > /dev/null)
+	fi
 }
 
 src_prepare() {
@@ -55,7 +56,7 @@ src_prepare() {
 
 	# Generate HOSTNAME & VHOST files
 	hostname -f > HOSTNAME
-	hostmame -f > VHOST
+	hostname -f > VHOST
 
 	epatch ${FILESDIR}/001-fix-rootdir.patch
 	epatch ${FILESDIR}/002-use-plugin_path.patch
@@ -63,7 +64,9 @@ src_prepare() {
 }
 
 src_compile() {
-	true
+	if use buildstep; then
+		docker build -t progrium/buildstep github.com/progrium/buildstep
+	fi
 }
 
 src_install() {
@@ -115,25 +118,22 @@ src_install() {
 
 pkg_postinst() {
 	sshcommand create ${PN} /usr/bin/${PN} 2>& 1> /dev/null
-	gpasswd -a ${PN} docker
+	$(gpasswd --add ${PN} docker > /dev/null)
 
-	elog " *************************************************** "
-	elog " Configuring                                         "
-	echo ""
-	elog " You'll have to add a public key associated with a   "
-	elog " username like this:                                 "
-	elog "	 cat ~/.ssh/id_rsa.pub | ssh $(hostname -f) \\     "
+	grep -Fxq '#includedir /etc/sudoers.d' /etc/sudoers
+	if [[ $? -eq 1 ]]; then
+		ewarn ""
+		ewarn "nginx-vhosts plugin requires to reload nginx after each"
+		ewarn "deployment. Please update your sudoers config with:"
+		ewarn ""
+		ewarn "  echo '#includedir /etc/sudoers.d' >> /etc/sudoers"
+		ewarn ""
+	fi
+
+	elog ""
+	elog "Configuring                                         "
+	elog "You'll have to add a public key associated with a   "
+	elog "username like this:                                 "
+	elog "  cat ~/.ssh/id_rsa.pub | ssh $(hostname -f) \\     "
 	elog "	 \"sudo sshcommand acl-add ${PN} johndoe\""
-
-	echo ""
-
-	elog " *************************************************** "
-	elog " Dokku ships with a pre-built version of version of  "
-	elog " the buildstep component by default but this package "
-	elog " does not set them up.                               "
-	elog "                                                     "
-	elog " To do so run :                                      "
-	elog "	 docker pull progrium/buildstep                    "
-	elog "                                                     "
-	elog " *************************************************** "
 }
