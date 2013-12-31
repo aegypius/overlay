@@ -20,7 +20,7 @@ inherit git-2 user
 
 LICENSE="MIT"
 SLOT="0"
-IUSE="nginx-vhosts"
+IUSE="openrc systemd"
 
 DEPEND="
     app-emulation/docker
@@ -29,6 +29,9 @@ DEPEND="
 "
 RDEPEND="${DEPEND}
     app-shells/bash
+    app-admin/sudo
+	openrc? ( sys-apps/openrc )
+	systemd? ( sys-apps/systemd )
 "
 
 src_unpack() {
@@ -55,6 +58,7 @@ src_prepare() {
 
     epatch ${FILESDIR}/001-fix-rootdir.patch
     epatch ${FILESDIR}/002-use-plugin_path.patch
+    epatch ${FILESDIR}/003-add-support-for-systemd.patch
 }
 
 src_compile() {
@@ -85,19 +89,24 @@ src_install() {
     doexe plugins/git/commands
     doexe plugins/git/backup-import
 
-    if use nginx-vhosts; then
-        ewarn "Nginx plugin has not been fully tested for gentoo"
-        exeinto /var/lib/${PN}/plugins/nginx-vhosts
-        doexe plugins/nginx-vhosts/commands
-        doexe plugins/nginx-vhosts/post-deploy
-        doexe plugins/nginx-vhosts/post-delete
-        doexe plugins/nginx-vhosts/backup-import
-        doexe plugins/nginx-vhosts/backup-export
-    fi
+    ewarn "Nginx plugin has not been fully tested for gentoo"
+    exeinto /var/lib/${PN}/plugins/nginx-vhosts
+    doexe plugins/nginx-vhosts/commands
+    doexe plugins/nginx-vhosts/post-deploy
+    doexe plugins/nginx-vhosts/post-delete
+    doexe plugins/nginx-vhosts/backup-import
+    doexe plugins/nginx-vhosts/backup-export
+
+	insinto /etc/nginx/sites.d
+	newins ${FILESDIR}/${PN}-nginx.conf ${PN}.conf
+
+	insinto /etc/sudoers.d
+	newins ${FILESDIR}/${PN}-sudoers.conf ${PN}
 
     insinto /var/lib/${PN}
     doins VERSION
     doins HOSTNAME
+    newins HOSTNAME VHOST
 
     keepdir /var/lib/${PN}
     fowners ${PN}:${PN} /var/lib/${PN}
@@ -115,7 +124,9 @@ pkg_postinst() {
     elog " username like this:                                 "
     elog "   cat ~/.ssh/id_rsa.pub | ssh $(hostname -f) \\     "
     elog "   \"sudo sshcommand acl-add ${PN} johndoe\""
-    elog ""
+
+    echo ""
+
     elog " *************************************************** "
     elog " Dokku ships with a pre-built version of version of  "
     elog " the buildstep component by default but this package "
