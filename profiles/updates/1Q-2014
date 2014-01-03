@@ -1,0 +1,4 @@
+move app-emulation/dokku-plugin-mariadb app-emulation/dokku-plugins-mariadb
+move app-emulation/dokku-plugin-postgresql app-emulation/dokku-plugins-postgresql
+move app-emulation/dokku-plugin-rebuild app-emulation/dokku-plugins-rebuild
+move app-emulation/dokku-plugin-supervisord app-emulation/dokku-plugins-supervisord

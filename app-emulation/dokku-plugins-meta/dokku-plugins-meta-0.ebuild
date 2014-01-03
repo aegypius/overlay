@@ -14,10 +14,10 @@ IUSE="mariadb mongodb postgresql redis supervisord rebuild"
 
 RDEPEND="
 	app-emulation/dokku
-	mariadb? ( app-emulation/dokku-plugin-mariadb )
-	mongodb? ( app-emulation/dokku-plugin-mongodb )
-	postgresql? ( app-emulation/dokku-plugin-postgresql )
-	redis? ( app-emulation/dokku-plugin-redis )
-	supervisord? ( app-emulation/dokku-plugin-supervisord )
-	rebuild? ( app-emulation/dokku-plugin-rebuild )
+	mariadb? ( app-emulation/dokku-plugins-mariadb )
+	mongodb? ( app-emulation/dokku-plugins-mongodb )
+	postgresql? ( app-emulation/dokku-plugins-postgresql )
+	redis? ( app-emulation/dokku-plugins-redis )
+	supervisord? ( app-emulation/dokku-plugins-supervisord )
+	rebuild? ( app-emulation/dokku-plugins-rebuild )
 "
