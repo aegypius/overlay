@@ -131,10 +131,24 @@ pkg_postinst() {
 		ewarn ""
 	fi
 
+	grep -Fq 'include /etc/nginx/sites.d/*.conf;' /etc/nginx/nginx.conf
+	if  [[ $? -eq 1 ]]; then
+		ewarn ""
+		ewarn "nginx-vhost plugin requires to load dokku configuration."
+		ewarn "Please add the following line to your /etc/nginx/nginx.conf"
+		ewarn "in the http section :"
+		ewarn ""
+		ewarn "  include /etc/nginx/sites.d/*.conf;"
+		ewarn ""
+	fi
+
+
 	elog ""
-	elog "Configuring                                         "
-	elog "You'll have to add a public key associated with a   "
-	elog "username like this:                                 "
-	elog "  cat ~/.ssh/id_rsa.pub | ssh $(hostname -f) \\     "
+	elog "Configuring"
+	elog "You'll have to add a public key associated with a"
+	elog "username like this:"
+	elog ""
+	elog "  cat ~/.ssh/id_rsa.pub | ssh $(hostname -f) \\"
 	elog "	 \"sudo sshcommand acl-add ${PN} johndoe\""
+	elog ""
 }
