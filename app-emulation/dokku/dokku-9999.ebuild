@@ -61,7 +61,6 @@ src_prepare() {
 	epatch ${FILESDIR}/001-fix-rootdir.patch
 	epatch ${FILESDIR}/002-use-plugin_path.patch
 	epatch ${FILESDIR}/003-add-support-for-systemd.patch
-	epatch ${FILESDIR}/004-suppress-git-output-when-dokku-trace-disabled.patch
 }
 
 src_compile() {
