@@ -10,7 +10,7 @@ HOMEPAGE="https://github.com/aegypius/overlay"
 LICENSE="metapackage"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="mariadb mongodb postgresql redis supervisord rebuild"
+IUSE="mariadb mongodb postgresql redis supervisord rebuild link"
 
 RDEPEND="
 	app-emulation/dokku
@@ -20,4 +20,5 @@ RDEPEND="
 	redis? ( app-emulation/dokku-plugins-redis )
 	supervisord? ( app-emulation/dokku-plugins-supervisord )
 	rebuild? ( app-emulation/dokku-plugins-rebuild )
+	link? ( app-emulation/dokku-plugins-link )
 "
