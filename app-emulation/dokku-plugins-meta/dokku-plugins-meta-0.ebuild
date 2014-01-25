@@ -10,7 +10,7 @@ HOMEPAGE="https://github.com/aegypius/overlay"
 LICENSE="metapackage"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="mariadb mongodb postgresql redis supervisord shoreman rebuild link"
+IUSE="mariadb mongodb postgresql redis supervisord shoreman rebuild link persistent-storage"
 
 RDEPEND="
 	app-emulation/dokku
@@ -22,6 +22,7 @@ RDEPEND="
 	shoreman? ( app-emulation/dokku-plugins-shoreman )
 	rebuild? ( app-emulation/dokku-plugins-rebuild )
 	link? ( app-emulation/dokku-plugins-link )
+	persistent-storage? ( app-emulation/dokku-plugins-persistent-storage )
 "
 REQUIRED_USE="
 	supervisord? ( !shoreman )
