@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/aegypius/overlay.png?label=ready)](https://waffle.io/aegypius/overlay)
 aegypius gentoo overlay
 =======================
 
