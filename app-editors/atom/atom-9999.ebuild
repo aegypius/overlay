@@ -57,17 +57,16 @@ src_install() {
 
     cd ${T}/Atom/resources/app
 
-    # Creates wrapper to atom app
-    newexe atom.sh atom
-
     # Installs everything in Atom/resources/app
     doins -r .
 
     # Fixes permissions
+    fperms +x /usr/share/${PN}/atom.sh
     fperms +x /usr/share/${PN}/apm/node_modules/.bin/apm
     fperms +x /usr/share/${PN}/apm/node_modules/atom-package-manager/bin/node
 
-    # Symlinking api to /usr/bin
+    # Symlinking to /usr/bin
+    dosym ../share/${PN}/atom.sh /usr/bin/atom
     dosym ../share/${PN}/apm/node_modules/atom-package-manager/bin/apm /usr/bin/apm
 
 
