@@ -12,7 +12,7 @@ SRC_URI=""
 
 EGIT_REPO_URI="git://github.com/atom/atom-shell"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 
 if [[ ${PV} == *9999 ]];then
@@ -25,7 +25,7 @@ fi
 IUSE="debug"
 
 DEPEND="
-    sys-devel/clang:0/3.4
+    >=sys-devel/clang-3.4
     dev-lang/python
 "
 RDEPEND="${DEPEND}"

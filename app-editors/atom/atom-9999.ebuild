@@ -12,7 +12,7 @@ SRC_URI=""
 
 EGIT_REPO_URI="git://github.com/atom/atom"
 
-LICENSE=""
+LICENSE="MIT"
 SLOT="0"
 
 if [[ ${PV} == *9999 ]];then
