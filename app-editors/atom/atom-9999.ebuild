@@ -29,7 +29,7 @@ DEPEND="
     >=net-libs/nodejs-0.10[npm]
 "
 RDEPEND="${DEPEND}"
-
+RESTRICT="strip"
 
 src_unpack() {
     git-2_src_unpack
@@ -42,25 +42,33 @@ src_prepare() {
 }
 
 src_compile() {
-    OUT=${S}/out
-    ./script/build --build-dir ${OUT}
+    ./script/build --verbose --build-dir ${T} || die "Failed to compile"
 }
 
 src_install() {
-
     prepall
 
-    into    /usr/share/${PN}
+    into    /usr
     insinto /usr/share/${PN}
-    exeinto /usr/share/${PN}
+    exeinto /usr/bin
 
-    cd $OUT/Atom
-    dodoc LICENSE
+    cd ${T}/Atom
+    dodoc LICENSE version
 
-    cd ${OUT}/Atom/resources/app
+    cd ${T}/Atom/resources/app
+
+    # Creates wrapper to atom app
+    newexe atom.sh atom
+
+    # Installs everything in Atom/resources/app
     doins -r .
 
-    dosym /usr/share/${PN}/atom.sh /usr/bin/${PN}
-    dosym /usr/share/${PN}/apm/node_modules/atom-package-manager/bin/apm /usr/bin/apm
+    # Fixes permissions
+    fperms +x /usr/share/${PN}/apm/node_modules/.bin/apm
+    fperms +x /usr/share/${PN}/apm/node_modules/atom-package-manager/bin/node
+
+    # Symlinking api to /usr/bin
+    dosym ../share/${PN}/apm/node_modules/atom-package-manager/bin/apm /usr/bin/apm
+
 
 }
