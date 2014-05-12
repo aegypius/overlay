@@ -1,4 +1,3 @@
 >=gnome-base/gnome-3.8.0
 www-client/chromium
-www-plugins/adobe-flash
-
+www-plugins/chrome-binary-plugins
