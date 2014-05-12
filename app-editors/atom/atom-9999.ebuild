@@ -38,7 +38,7 @@ src_unpack() {
 src_prepare() {
     default_src_prepare
 
-    epatch ${FILESDIR}/0001-fix-atom-shell-path.patch
+    epatch ${FILESDIR}/0001-fix-atom.sh.patch
 }
 
 src_compile() {
