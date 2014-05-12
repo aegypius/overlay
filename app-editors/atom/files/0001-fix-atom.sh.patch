@@ -1,18 +1,18 @@
 diff --git a/atom.sh b/atom.sh
-index b4e06a7..6c2cc30 100755
+index 840c036..e1593e4 100755
 --- a/atom.sh
 +++ b/atom.sh
 @@ -66,18 +66,14 @@ if [ $OS == 'Mac' ]; then
      open -a "$ATOM_PATH/$ATOM_APP_NAME" -n --args --executed-from="$(pwd)" --pid=$$ "$@"
    fi
  elif [ $OS == 'Linux' ]; then
--  SCRIPT=`readlink -f "$0"`
--  USR_DIRECTORY=`readlink -f $(dirname $SCRIPT)/..`
+-  SCRIPT=$(readlink -f "$0")
+-  USR_DIRECTORY=$(readlink -f $(dirname $SCRIPT)/..)
 -  ATOM_PATH="$USR_DIRECTORY/share/atom/atom"
 -
 -  [ -x "$ATOM_PATH" ] || ATOM_PATH='/tmp/atom-build/Atom/atom'
 +  ATOM_PATH="/usr/bin/atom-shell"
-
+ 
    if [ $EXPECT_OUTPUT ]; then
 -    "$ATOM_PATH" --executed-from="$(pwd)" --pid=$$ "$@"
 +    "$ATOM_PATH" /usr/share/atom --executed-from="$(pwd)" --pid=$$ "$@"
