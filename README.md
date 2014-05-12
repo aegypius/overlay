@@ -3,6 +3,13 @@ aegypius gentoo overlay
 
 This is my personal gentoo overlay. I use it to customize some ebuilds to my needs
 
----
-[![endorse](http://api.coderwall.com/aegypius/endorsecount.png)](http://coderwall.com/aegypius)
-[![Stories in Ready](https://badge.waffle.io/aegypius/overlay.png?label=ready)](https://waffle.io/aegypius/overlay)
+Requirements
+------------
+- Gentoo Linux
+- app-portage/layman
+
+Usage
+-----
+Add this overlay with [Layman](http://layman.sourceforge.net/) like this:
+
+    layman -o http://aegypius.github.io/overlay/repositories.xml -f -a aegypius
