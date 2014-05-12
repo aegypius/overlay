@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit versionator git-2 flag-o-matic
+inherit git-2 flag-o-matic python
 
 DESCRIPTION="A hackable text editor for the 21st Century"
 HOMEPAGE="https://atom.io"
@@ -31,6 +31,14 @@ DEPEND="
 RDEPEND="${DEPEND}"
 RESTRICT="strip"
 
+PYTHON_DEPEND="2"
+RESTRICT_PYTHON_ABIS="3.*"
+
+pkg_setup() {
+    python_set_active_version 2
+    python_pkg_setup
+}
+
 src_unpack() {
     git-2_src_unpack
 }
@@ -42,6 +50,10 @@ src_prepare() {
 }
 
 src_compile() {
+    # Update npm config to use python 2
+    export PYTHON=$(PYTHON -a)
+    npm config set python $(PYTHON -a)
+
     ./script/build --verbose --build-dir ${T} || die "Failed to compile"
 }
 
