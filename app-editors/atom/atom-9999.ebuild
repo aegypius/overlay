@@ -60,6 +60,8 @@ src_compile() {
 src_install() {
     prepall
 
+    newenvd "${FILESDIR}"/atom.envd 99atom
+
     into    /usr
     insinto /usr/share/${PN}
     exeinto /usr/bin
