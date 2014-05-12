@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit versionator git-2 flag-o-matic
+inherit git-2 flag-o-matic python
 
 DESCRIPTION="Cross-platform desktop application shell"
 HOMEPAGE="https://github.com/atom/atom-shell"
@@ -26,21 +26,33 @@ IUSE="debug"
 
 DEPEND="
     >=sys-devel/clang-3.4
-    dev-lang/python
+    dev-lang/python:2.7
 "
 RDEPEND="${DEPEND}"
 
 RESTRICT="strip"
 
+PYTHON_DEPEND="2"
+RESTRICT_PYTHON_ABIS="3.*"
+
 src_unpack() {
     git-2_src_unpack
+}
+
+pkg_setup() {
+    python_set_active_version 2
+    python_pkg_setup
 }
 
 src_prepare() {
     default_src_prepare
 
+    # Update npm config to use python 2
+    export PYTHON=$(PYTHON -a)
+    npm config set python $(PYTHON -a)
+
     # Bootstrap
-    ./script/bootstrap.py
+    ./script/bootstrap.py || die "bootstrap failed"
 
     # Fix libudev.so.0 link
     sed -i -e 's/libudev.so.0/libudev.so.1/g' \
