@@ -11,6 +11,7 @@ HOMEPAGE="https://github.com/atom/atom-shell"
 SRC_URI=""
 
 EGIT_REPO_URI="git://github.com/atom/atom-shell"
+EGIT_HAS_SUBMODULES="1"
 
 LICENSE="MIT"
 SLOT="0"
@@ -30,7 +31,10 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-RESTRICT="strip"
+QA_PRESTRIPPED="
+    /usr/share/atom-shell/libffmpegsumo.so
+    /usr/share/atom-shell/libchromiumcontent.so
+"
 
 PYTHON_DEPEND="2"
 RESTRICT_PYTHON_ABIS="3.*"
@@ -42,14 +46,14 @@ src_unpack() {
 pkg_setup() {
     python_set_active_version 2
     python_pkg_setup
-}
-
-src_prepare() {
-    default_src_prepare
 
     # Update npm config to use python 2
     export PYTHON=$(PYTHON -a)
     npm config set python $(PYTHON -a)
+}
+
+src_prepare() {
+    default_src_prepare
 
     # Bootstrap
     ./script/bootstrap.py || die "bootstrap failed"
