@@ -60,14 +60,19 @@ src_compile() {
 src_install() {
     prepall
 
+    into    /usr
+
     newenvd "${FILESDIR}"/atom.envd 99atom
 
-    into    /usr
+    insinto /usr/share/applications
+    newins  "${FILESDIR}"/atom.desktop atom.desktop
+
     insinto /usr/share/${PN}
     exeinto /usr/bin
 
     cd ${T}/Atom
-    dodoc LICENSE version
+    dodoc LICENSE
+    doins version
 
     cd ${T}/Atom/resources/app
 

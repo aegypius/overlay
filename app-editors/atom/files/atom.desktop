@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Atom
+Comment=A hackable text editor for the 21st Century.
+Exec=/usr/bin/atom %U
+Icon=/usr/share/atom/resources/atom.png
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;Utility;TextEditor;
