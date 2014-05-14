@@ -29,7 +29,10 @@ DEPEND="
     >=net-libs/nodejs-0.10[npm]
 "
 RDEPEND="${DEPEND}"
-RESTRICT="strip"
+
+QA_PRESTRIPPED="
+   /usr/share/atom/node_modules/symbols-view/vendor/ctags-linux
+"
 
 PYTHON_DEPEND="2"
 RESTRICT_PYTHON_ABIS="3.*"
@@ -37,6 +40,10 @@ RESTRICT_PYTHON_ABIS="3.*"
 pkg_setup() {
     python_set_active_version 2
     python_pkg_setup
+
+    # Update npm config to use python 2
+    export PYTHON=$(PYTHON -a)
+    npm config set python $(PYTHON -a)
 }
 
 src_unpack() {
@@ -50,10 +57,6 @@ src_prepare() {
 }
 
 src_compile() {
-    # Update npm config to use python 2
-    export PYTHON=$(PYTHON -a)
-    npm config set python $(PYTHON -a)
-
     ./script/build --verbose --build-dir ${T} || die "Failed to compile"
 }
 
@@ -72,7 +75,6 @@ src_install() {
 
     cd ${T}/Atom
     dodoc LICENSE
-    doins version
 
     cd ${T}/Atom/resources/app
 
