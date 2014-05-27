@@ -1,26 +1,26 @@
 diff --git a/atom.sh b/atom.sh
-index 840c036..e1593e4 100755
+index ddeba08..2ad9b22 100755
 --- a/atom.sh
 +++ b/atom.sh
-@@ -66,18 +66,14 @@ if [ $OS == 'Mac' ]; then
-     open -a "$ATOM_PATH/$ATOM_APP_NAME" -n --args --executed-from="$(pwd)" --pid=$$ "$@"
-   fi
+@@ -68,18 +68,18 @@ if [ $OS == 'Mac' ]; then
  elif [ $OS == 'Linux' ]; then
--  SCRIPT=$(readlink -f "$0")
--  USR_DIRECTORY=$(readlink -f $(dirname $SCRIPT)/..)
+   SCRIPT=$(readlink -f "$0")
+   USR_DIRECTORY=$(readlink -f $(dirname $SCRIPT)/..)
 -  ATOM_PATH="$USR_DIRECTORY/share/atom/atom"
--
--  [ -x "$ATOM_PATH" ] || ATOM_PATH='/tmp/atom-build/Atom/atom'
-+  ATOM_PATH="/usr/bin/atom-shell"
- 
++  ATOM_PATH="$USR_DIRECTORY/atom-shell/atom"
+
+   : ${TMPDIR:=/tmp}
+
+   [ -x "$ATOM_PATH" ] || ATOM_PATH="$TMPDIR/atom-build/Atom/atom"
+
    if [ $EXPECT_OUTPUT ]; then
 -    "$ATOM_PATH" --executed-from="$(pwd)" --pid=$$ "$@"
 +    "$ATOM_PATH" /usr/share/atom --executed-from="$(pwd)" --pid=$$ "$@"
      exit $?
    else
      (
--    nohup "$ATOM_PATH" --executed-from="$(pwd)" --pid=$$ "$@" > /tmp/atom-nohup.out 2>&1
-+    nohup "$ATOM_PATH" /usr/share/atom --executed-from="$(pwd)" --pid=$$ "$@" > /tmp/atom-nohup.out 2>&1
+-    nohup "$ATOM_PATH" --executed-from="$(pwd)" --pid=$$ "$@" > "$TMPDIR/atom-nohup.out" 2>&1
++    nohup "$ATOM_PATH" /usr/share/atom --executed-from="$(pwd)" --pid=$$ "$@" > "$TMPDIR/atom-nohup.out" 2>&1
      if [ $? -ne 0 ]; then
-       cat /tmp/atom-nohup.out
+       cat "$TMPDIR/atom-nohup.out"
        exit $?
