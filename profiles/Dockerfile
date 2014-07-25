@@ -34,7 +34,7 @@ RUN emerge --regen --quiet
 
 # Upgrade every installed packages
 # ================================
-RUN emerge --use --verbose --newuse --deep @world
+RUN emerge --update --verbose --newuse --deep @world
 RUN etc-update -p
 RUN emerge --depclean
 
