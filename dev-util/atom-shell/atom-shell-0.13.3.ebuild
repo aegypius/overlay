@@ -27,6 +27,8 @@ IUSE="debug"
 DEPEND="
     >=sys-devel/clang-3.4
     dev-lang/python:2.7
+    >=net-libs/nodejs-0.10.29[npm]
+    x11-libs/gtk+:2
 "
 RDEPEND="${DEPEND}"
 
@@ -66,7 +68,7 @@ src_prepare() {
 
 src_compile() {
     OUT=out/$(usex debug Debug Release)
-    ./script/build.py --configuration $(usex debug Debug Release)
+    ./script/build.py --configuration $(usex debug Debug Release) || die "Compilation failed"
     echo "v$PV" > ${OUT}/version
     cp LICENSE $OUT
 }
