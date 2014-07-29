@@ -6,7 +6,7 @@
       contact = ""
       status  = "unofficial"
       name    = "aegypius">
-      <link>http://github.com/aegypius/overlay/wiki</link>
+      <link>http://github.com/aegypius/overlay</link>
       <description>aegypius personal overlay</description>
    </overlay>
 </layman>
