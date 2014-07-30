@@ -25,7 +25,7 @@ fi
 IUSE=""
 
 DEPEND="
-    dev-util/atom-shell
+    =dev-util/atom-shell-0.13.3
     >=net-libs/nodejs-0.10.29[npm]
 "
 RDEPEND="${DEPEND}"
