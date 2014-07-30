@@ -1,3 +1,8 @@
+# aegypius              (30 Juil 2014)
+# dev-util/atom-shell > 0.13.3 is broken
+# FATAL:content_main_runner.cc(689)] Check failed: base::i18n::InitializeICU().
+=dev-util/atom-shell-0.15.0
+=app-editors/atom-0.120.0
 # aegypius              (01 Aug 2014)
 # Live ebuilds for atom and atom-shell are masked
 # because of atom-shell > 0.13.3 fails to build for
