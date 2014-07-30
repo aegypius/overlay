@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit git-2 python
+inherit git-2 flag-o-matic python
 
 DESCRIPTION="Cross-platform desktop application shell"
 HOMEPAGE="https://github.com/atom/atom-shell"
@@ -25,7 +25,7 @@ fi
 IUSE="debug"
 
 DEPEND="
-    >=sys-devel/clang-3.4
+    sys-devel/llvm:0/3.4[clang]
     dev-lang/python:2.7
     >=net-libs/nodejs-0.10.29[npm]
     x11-libs/gtk+:2
@@ -62,18 +62,24 @@ pkg_setup() {
 
 src_prepare() {
     default_src_prepare
+
     # Bootstrap
     ./script/bootstrap.py || die "bootstrap failed"
 
     # Fix libudev.so.0 link
     sed -i -e 's/libudev.so.0/libudev.so.1/g' \
         ./vendor/brightray/vendor/download/libchromiumcontent/Release/libchromiumcontent.so \
-      || die "libudev fix failed"
+        || die "libudev fix failed"
 
     # Make every subprocess calls fatal
-    sed -i -e 's/subprocess\.call\\(/subprocess.check_call(/g' \
+    sed -i -e 's/subprocess.call(/subprocess.check_call(/g' \
         ./script/build.py \
-      || die "build fix failed"
+        || die "build fix failed"
+
+    # Fix missing libs in linking process (the ugly way)
+    sed -i -e 's/-lglib-2.0/-lglib-2.0 -lgconf-2 -lX11 -lXrandr -lXext/g' \
+        ./out/$(usex debug Debug Release)/obj/atom.ninja \
+        || die "linkage fix failed"
 }
 
 src_compile() {
