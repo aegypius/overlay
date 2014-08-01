@@ -63,6 +63,13 @@ pkg_setup() {
 src_prepare() {
     default_src_prepare
 
+    einfo "Bootstrap atom-shell source"
+
+    # Fix util.execute function to be more verbose
+    sed -i -e 's/def execute(argv):/def execute(argv):\n  print "   - bootstrap: " + " ".join(argv)/g' \
+      ./script/lib/util.py \
+      || die "Failed to sed lib/util.py"
+
     # Bootstrap
     ./script/bootstrap.py || die "bootstrap failed"
 
@@ -102,7 +109,10 @@ src_install() {
     doexe atom libchromiumcontent.so libffmpegsumo.so
 
     doins -r resources
+    doins -r locales
     doins version
+    doins LICENSE
+    doins icudtl.dat
     doins content_shell.pak
     dosym /usr/share/${PN}/atom /usr/bin/${PN}
 
