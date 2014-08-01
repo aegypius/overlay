@@ -25,7 +25,7 @@ fi
 IUSE=""
 
 DEPEND="
-    =dev-util/atom-shell-0.15.0
+    >=dev-util/atom-shell-0.15.0
     >=net-libs/nodejs-0.10.29[npm]
 "
 RDEPEND="${DEPEND}"
@@ -62,6 +62,13 @@ src_prepare() {
       ./atom.sh \
       || die "Fail fixing atom-shell invocation"
 
+    # Skip atom-shell download
+    sed -i -e "s/defaultTasks = \['download-atom-shell', /defaultTasks = [/g" \
+      ./build/Gruntfile.coffee \
+      || die "Failed to fix Gruntfile"
+
+    # Skip atom-shell copy
+    epatch ${FILESDIR}/0002-skip-atom-shell-copy.patch
 }
 
 src_compile() {
@@ -81,10 +88,8 @@ src_install() {
     insinto /usr/share/${PN}
     exeinto /usr/bin
 
-    cd ${T}/Atom
-    dodoc LICENSE
-
     cd ${T}/Atom/resources/app
+    dodoc LICENSE.md
 
     # Installs everything in Atom/resources/app
     doins -r .
