@@ -1,5 +1,6 @@
-# aegypius              (23 Sept 2010)
-# Aptana Software Update does not work
-=dev-util/aptana-studio-bin-2*
-=dev-util/aptana-studio-bin-3*
-
+# aegypius              (01 Aug 2014)
+# Live ebuilds for atom and atom-shell are masked
+# because of atom-shell > 0.13.3 fails to build for
+# now (https://github.com/aegypius/overlay/issues/17)
+=app-editors/atom-9999
+=dev-util/atom-shell-9999
