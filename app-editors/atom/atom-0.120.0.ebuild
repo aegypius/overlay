@@ -25,7 +25,7 @@ fi
 IUSE=""
 
 DEPEND="
-    >=dev-util/atom-shell-0.15.0
+    >=dev-util/atom-shell-0.15.2
     >=net-libs/nodejs-0.10.29[npm]
 "
 RDEPEND="${DEPEND}"
@@ -63,12 +63,12 @@ src_prepare() {
       || die "Fail fixing atom-shell invocation"
 
     # Skip atom-shell download
-    sed -i -e "s/defaultTasks = \['download-atom-shell', /defaultTasks = [/g" \
-      ./build/Gruntfile.coffee \
-      || die "Failed to fix Gruntfile"
+    # sed -i -e "s/defaultTasks = \['download-atom-shell', /defaultTasks = [/g" \
+    #   ./build/Gruntfile.coffee \
+    #   || die "Failed to fix Gruntfile"
 
     # Skip atom-shell copy
-    epatch ${FILESDIR}/0002-skip-atom-shell-copy.patch
+    # epatch ${FILESDIR}/0002-skip-atom-shell-copy.patch
 }
 
 src_compile() {
