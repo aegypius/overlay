@@ -114,6 +114,7 @@ src_install() {
     doins LICENSE
     doins icudtl.dat
     doins content_shell.pak
+
     dosym /usr/share/${PN}/atom /usr/bin/${PN}
 
     dodoc LICENSE
