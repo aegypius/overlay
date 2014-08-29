@@ -1,0 +1,11 @@
+--- listen.gemspec.old	2014-07-22 07:31:25.715854808 +0000
++++ listen.gemspec	2014-07-22 07:32:55.821818833 +0000
+@@ -14,7 +14,7 @@
+   s.description = 'The Listen gem listens to file modifications and '\
+     'notifies you about the changes. Works everywhere!'
+ 
+-  s.files        = `git ls-files`.split($/)
++  s.files        = Dir.glob('{lib}/**/*') + %w[CHANGELOG.md LICENSE README.md]
+   s.test_files   = s.files.grep(%r{^spec/})
+   s.executable   = 'listen'
+   s.require_path = 'lib'
