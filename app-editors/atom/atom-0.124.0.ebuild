@@ -25,7 +25,7 @@ fi
 IUSE=""
 
 DEPEND="
-    >=dev-util/atom-shell-0.15.2
+    >=dev-util/atom-shell-0.15.9
     >=net-libs/nodejs-0.10.29[npm]
 "
 RDEPEND="${DEPEND}"
@@ -54,25 +54,27 @@ src_prepare() {
     default_src_prepare
 
     # Fix atom-shell invocation
-    sed -i -e 's@$USR_DIRECTORY/share/atom@$USR_DIRECTORY/atom-shell@g' \
-      ./atom.sh \
-      || die "Fail fixing atom-shell directory"
+    # sed -i -e 's@$USR_DIRECTORY/share/atom@$USR_DIRECTORY/atom-shell@g' \
+    #   ./atom.sh \
+    #   || die "Fail fixing atom-shell directory"
 
-    sed -i -e 's/"$ATOM_PATH" --executed-from/"$ATOM_PATH" $ATOM_RESOURCE_PATH --executed-from/g' \
-      ./atom.sh \
-      || die "Fail fixing atom-shell invocation"
+    # sed -i -e 's/"$ATOM_PATH" --executed-from/"$ATOM_PATH" $ATOM_RESOURCE_PATH --executed-from/g' \
+    #   ./atom.sh \
+    #   || die "Fail fixing atom-shell invocation"
 
     # Skip atom-shell download
-    # sed -i -e "s/defaultTasks = \['download-atom-shell', /defaultTasks = [/g" \
-    #   ./build/Gruntfile.coffee \
-    #   || die "Failed to fix Gruntfile"
+    sed -i -e "s/defaultTasks = \['download-atom-shell', /defaultTasks = [/g" \
+      ./build/Gruntfile.coffee \
+      || die "Failed to fix Gruntfile"
 
     # Skip atom-shell copy
-    # epatch ${FILESDIR}/0002-skip-atom-shell-copy.patch
+    epatch ${FILESDIR}/0002-skip-atom-shell-copy.patch
 }
 
 src_compile() {
     ./script/build --verbose --build-dir ${T} || die "Failed to compile"
+
+    ${T}/Atom/resources/app/apm/node_modules/atom-package-manager/bin/apm rebuild || die "Failed to rebuild native module"
 }
 
 src_install() {
@@ -85,7 +87,7 @@ src_install() {
     insinto /usr/share/applications
     newins  "${FILESDIR}"/atom.desktop atom.desktop
 
-    insinto /usr/share/${PN}
+    insinto /usr/share/${PN}/resources/app
     exeinto /usr/bin
 
     cd ${T}/Atom/resources/app
@@ -95,13 +97,13 @@ src_install() {
     doins -r .
 
     # Fixes permissions
-    fperms +x /usr/share/${PN}/atom.sh
-    fperms +x /usr/share/${PN}/apm/node_modules/.bin/apm
-    fperms +x /usr/share/${PN}/apm/node_modules/atom-package-manager/bin/node
+    fperms +x /usr/share/${PN}/resources/app/atom.sh
+    fperms +x /usr/share/${PN}/resources/app/apm/node_modules/.bin/apm
+    fperms +x /usr/share/${PN}/resources/app/apm/node_modules/atom-package-manager/bin/node
 
     # Symlinking to /usr/bin
-    dosym ../share/${PN}/atom.sh /usr/bin/atom
-    dosym ../share/${PN}/apm/node_modules/atom-package-manager/bin/apm /usr/bin/apm
+    dosym ../share/${PN}/resources/app/atom.sh /usr/bin/atom
+    dosym ../share/${PN}/resources/app/apm/node_modules/atom-package-manager/bin/apm /usr/bin/apm
 
 
 }

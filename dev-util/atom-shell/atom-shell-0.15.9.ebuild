@@ -37,11 +37,13 @@ DEPEND="
     media-libs/alsa-lib
     net-print/cups
 "
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+    !<app-editors/atom-0.120.0
+"
 
 QA_PRESTRIPPED="
-    /usr/share/atom-shell/libffmpegsumo.so
-    /usr/share/atom-shell/libchromiumcontent.so
+    /usr/share/atom/libffmpegsumo.so
+    /usr/share/atom/libchromiumcontent.so
 "
 
 PYTHON_DEPEND="2"
@@ -100,9 +102,9 @@ src_install() {
 
     prepall
 
-    into    /usr/share/${PN}
-    insinto /usr/share/${PN}
-    exeinto /usr/share/${PN}
+    into    /usr/share/atom
+    insinto /usr/share/atom
+    exeinto /usr/share/atom
 
     cd ${OUT}
 
@@ -114,8 +116,6 @@ src_install() {
     doins LICENSE
     doins icudtl.dat
     doins content_shell.pak
-
-    dosym /usr/share/${PN}/atom /usr/bin/${PN}
 
     dodoc LICENSE
 }
