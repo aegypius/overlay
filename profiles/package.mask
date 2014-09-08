@@ -1,6 +1,0 @@
-# aegypius              (01 Aug 2014)
-# Live ebuilds for atom and atom-shell are masked
-# because of atom-shell > 0.13.3 fails to build for
-# now (https://github.com/aegypius/overlay/issues/17)
->dev-util/atom-shell-0.13.3
->app-editors/atom-0.119.0
