@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit git-2 flag-o-matic python
+inherit git-2 flag-o-matic python eutils
 
 DESCRIPTION="A hackable text editor for the 21st Century"
 HOMEPAGE="https://atom.io"
@@ -69,6 +69,11 @@ src_prepare() {
 
     # Skip atom-shell copy
     epatch ${FILESDIR}/0002-skip-atom-shell-copy.patch
+
+    # Fix atom location guessing
+    sed -i -e 's/ATOM_PATH="$USR_DIRECTORY\/share\/atom/ATOM_PATH="$USR_DIRECTORY\/../g' \
+      ./atom.sh \
+      || die "Fail fixing atom-shell directory"
 }
 
 src_compile() {
@@ -85,12 +90,12 @@ src_install() {
     newenvd "${FILESDIR}"/atom.envd 99atom
 
     insinto /usr/share/applications
-    newins  "${FILESDIR}"/atom.desktop atom.desktop
 
     insinto /usr/share/${PN}/resources/app
     exeinto /usr/bin
 
     cd ${T}/Atom/resources/app
+    doicon resources/atom.png
     dodoc LICENSE.md
 
     # Installs everything in Atom/resources/app
@@ -105,5 +110,5 @@ src_install() {
     dosym ../share/${PN}/resources/app/atom.sh /usr/bin/atom
     dosym ../share/${PN}/resources/app/apm/node_modules/atom-package-manager/bin/apm /usr/bin/apm
 
-
+    make_desktop_entry "/usr/bin/atom %U"  "Atom" "atom" "Development;TextEditor" "StartupNotify=true"
 }
