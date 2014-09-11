@@ -53,15 +53,6 @@ src_unpack() {
 src_prepare() {
     default_src_prepare
 
-    # Fix atom-shell invocation
-    # sed -i -e 's@$USR_DIRECTORY/share/atom@$USR_DIRECTORY/atom-shell@g' \
-    #   ./atom.sh \
-    #   || die "Fail fixing atom-shell directory"
-
-    # sed -i -e 's/"$ATOM_PATH" --executed-from/"$ATOM_PATH" $ATOM_RESOURCE_PATH --executed-from/g' \
-    #   ./atom.sh \
-    #   || die "Fail fixing atom-shell invocation"
-
     # Skip atom-shell download
     sed -i -e "s/defaultTasks = \['download-atom-shell', /defaultTasks = [/g" \
       ./build/Gruntfile.coffee \
@@ -110,5 +101,5 @@ src_install() {
     dosym ../share/${PN}/resources/app/atom.sh /usr/bin/atom
     dosym ../share/${PN}/resources/app/apm/node_modules/atom-package-manager/bin/apm /usr/bin/apm
 
-    make_desktop_entry "/usr/bin/atom %U"  "Atom" "atom" "Development;TextEditor" "StartupNotify=true"
+    make_desktop_entry "/usr/bin/atom %U" "Atom" "atom" "GNOME;GTK;Utility;TextEditor;Development;" "MimeType=text/plain;\nStartupNotify=true\nStartupWMClass=Atom Shell"
 }
