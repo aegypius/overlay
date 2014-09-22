@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit git-2 flag-o-matic python
+inherit git-2 flag-o-matic python eutils
 
 DESCRIPTION="A hackable text editor for the 21st Century"
 HOMEPAGE="https://atom.io"
@@ -25,7 +25,7 @@ fi
 IUSE=""
 
 DEPEND="
-    dev-util/atom-shell
+    >=dev-util/atom-shell-0.15.9
     >=net-libs/nodejs-0.10.29[npm]
 "
 RDEPEND="${DEPEND}"
@@ -53,11 +53,24 @@ src_unpack() {
 src_prepare() {
     default_src_prepare
 
-    epatch ${FILESDIR}/0001-fix-atom.sh.patch
+    # Skip atom-shell download
+    sed -i -e "s/defaultTasks = \['download-atom-shell', /defaultTasks = [/g" \
+      ./build/Gruntfile.coffee \
+      || die "Failed to fix Gruntfile"
+
+    # Skip atom-shell copy
+    epatch ${FILESDIR}/0002-skip-atom-shell-copy.patch
+
+    # Fix atom location guessing
+    sed -i -e 's/ATOM_PATH="$USR_DIRECTORY\/share\/atom/ATOM_PATH="$USR_DIRECTORY\/../g' \
+      ./atom.sh \
+      || die "Fail fixing atom-shell directory"
 }
 
 src_compile() {
     ./script/build --verbose --build-dir ${T} || die "Failed to compile"
+
+    ${T}/Atom/resources/app/apm/node_modules/atom-package-manager/bin/apm rebuild || die "Failed to rebuild native module"
 }
 
 src_install() {
@@ -68,27 +81,25 @@ src_install() {
     newenvd "${FILESDIR}"/atom.envd 99atom
 
     insinto /usr/share/applications
-    newins  "${FILESDIR}"/atom.desktop atom.desktop
 
-    insinto /usr/share/${PN}
+    insinto /usr/share/${PN}/resources/app
     exeinto /usr/bin
 
-    cd ${T}/Atom
-    dodoc LICENSE
-
     cd ${T}/Atom/resources/app
+    doicon resources/atom.png
+    dodoc LICENSE.md
 
     # Installs everything in Atom/resources/app
     doins -r .
 
     # Fixes permissions
-    fperms +x /usr/share/${PN}/atom.sh
-    fperms +x /usr/share/${PN}/apm/node_modules/.bin/apm
-    fperms +x /usr/share/${PN}/apm/node_modules/atom-package-manager/bin/node
+    fperms +x /usr/share/${PN}/resources/app/atom.sh
+    fperms +x /usr/share/${PN}/resources/app/apm/node_modules/.bin/apm
+    fperms +x /usr/share/${PN}/resources/app/apm/node_modules/atom-package-manager/bin/node
 
     # Symlinking to /usr/bin
-    dosym ../share/${PN}/atom.sh /usr/bin/atom
-    dosym ../share/${PN}/apm/node_modules/atom-package-manager/bin/apm /usr/bin/apm
+    dosym ../share/${PN}/resources/app/atom.sh /usr/bin/atom
+    dosym ../share/${PN}/resources/app/apm/node_modules/atom-package-manager/bin/apm /usr/bin/apm
 
-
+    make_desktop_entry "/usr/bin/atom %U" "Atom" "atom" "GNOME;GTK;Utility;TextEditor;Development;" "MimeType=text/plain;\nStartupNotify=true\nStartupWMClass=Atom Shell"
 }
