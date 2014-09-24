@@ -51,7 +51,7 @@ src_unpack() {
 }
 
 src_prepare() {
-    default_src_prepare
+    default
 
     # Skip atom-shell download
     sed -i -e "s/defaultTasks = \['download-atom-shell', /defaultTasks = [/g" \

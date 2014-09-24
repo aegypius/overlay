@@ -64,7 +64,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-    default_src_prepare
+    default
 
     einfo "Bootstrap atom-shell source"
 
