@@ -78,8 +78,6 @@ src_install() {
 
     into    /usr
 
-    newenvd "${FILESDIR}"/atom.envd 99atom
-
     insinto /usr/share/applications
 
     insinto /usr/share/${PN}/resources/app
