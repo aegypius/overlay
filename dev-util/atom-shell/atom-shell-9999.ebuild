@@ -37,6 +37,7 @@ DEPEND="
     media-libs/alsa-lib
     net-print/cups
     sys-libs/libcap
+    x11-libs/libXtst
 "
 RDEPEND="${DEPEND}
     !<app-editors/atom-0.120.0
