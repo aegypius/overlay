@@ -65,8 +65,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-    default
-
     einfo "Bootstrap atom-shell source"
 
     # Fix util.execute function to be more verbose
@@ -101,7 +99,6 @@ src_compile() {
 }
 
 src_install() {
-
     prepall
 
     into    /usr/share/atom
