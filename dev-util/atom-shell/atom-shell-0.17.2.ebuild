@@ -4,7 +4,9 @@
 
 EAPI=5
 
-inherit git-2 flag-o-matic python
+PYTHON_COMPAT=( python2_7 )
+
+inherit git-2 flag-o-matic python-r1
 
 DESCRIPTION="Cross-platform desktop application shell"
 HOMEPAGE="https://github.com/atom/atom-shell"
@@ -16,105 +18,105 @@ LICENSE="MIT"
 SLOT="0"
 
 if [[ ${PV} == *9999 ]];then
-    KEYWORDS=""
+	KEYWORDS=""
 else
-    KEYWORDS="~amd64"
-    EGIT_COMMIT="v${PV}"
+	KEYWORDS="~amd64"
+	EGIT_COMMIT="v${PV}"
 fi
 
 IUSE="debug"
 
 DEPEND="
-    sys-devel/llvm:0/3.4[clang]
-    dev-lang/python:2.7
-    >=net-libs/nodejs-0.10.29[npm]
-    x11-libs/gtk+:2
-    x11-libs/libnotify
-    gnome-base/libgnome-keyring
-    dev-libs/nss
-    dev-libs/nspr
-    gnome-base/gconf
-    media-libs/alsa-lib
-    net-print/cups
-    sys-libs/libcap
-    x11-libs/libXtst
+	sys-devel/llvm:0/3.4[clang]
+	dev-lang/python:2.7
+	>=net-libs/nodejs-0.10.29[npm]
+	x11-libs/gtk+:2
+	x11-libs/libnotify
+	gnome-base/libgnome-keyring
+	dev-libs/nss
+	dev-libs/nspr
+	gnome-base/gconf
+	media-libs/alsa-lib
+	net-print/cups
+	sys-libs/libcap
+	x11-libs/libXtst
 "
 RDEPEND="${DEPEND}
-    !<app-editors/atom-0.120.0
+	!<app-editors/atom-0.120.0
 "
 
 QA_PRESTRIPPED="
-    /usr/share/atom/libffmpegsumo.so
-    /usr/share/atom/libchromiumcontent.so
+	/usr/share/atom/libffmpegsumo.so
+	/usr/share/atom/libchromiumcontent.so
 "
 
 PYTHON_DEPEND="2"
 RESTRICT_PYTHON_ABIS="3.*"
 
 src_unpack() {
-    git-2_src_unpack
+	git-2_src_unpack
 }
 
 pkg_setup() {
-    python_set_active_version 2
-    python_pkg_setup
+	python_set_active_version 2
+	python_pkg_setup
 
-    # Update npm config to use python 2
-    export PYTHON=$(PYTHON -a)
-    npm config set python $(PYTHON -a)
+	# Update npm config to use python 2
+	export PYTHON=$(PYTHON -a)
+	npm config set python $(PYTHON -a)
 }
 
 src_prepare() {
-    einfo "Bootstrap atom-shell source"
+	einfo "Bootstrap atom-shell source"
 
-    # Fix util.execute function to be more verbose
-    sed -i -e 's/def execute(argv):/def execute(argv):\n  print "   - bootstrap: " + " ".join(argv)/g' \
-      ./script/lib/util.py \
-      || die "Failed to sed lib/util.py"
+	# Fix util.execute function to be more verbose
+	sed -i -e 's/def execute(argv):/def execute(argv):\n  print "   - bootstrap: " + " ".join(argv)/g' \
+		./script/lib/util.py \
+		|| die "Failed to sed lib/util.py"
 
-    # Bootstrap
-    ./script/bootstrap.py || die "bootstrap failed"
+	# Bootstrap
+	./script/bootstrap.py || die "bootstrap failed"
 
-    # Fix libudev.so.0 link
-    sed -i -e 's/libudev.so.0/libudev.so.1/g' \
-        ./vendor/brightray/vendor/download/libchromiumcontent/Release/libchromiumcontent.so \
-        || die "libudev fix failed"
+	# Fix libudev.so.0 link
+	sed -i -e 's/libudev.so.0/libudev.so.1/g' \
+		./vendor/brightray/vendor/download/libchromiumcontent/Release/libchromiumcontent.so \
+		|| die "libudev fix failed"
 
-    # Make every subprocess calls fatal
-    sed -i -e 's/subprocess.call(/subprocess.check_call(/g' \
-        ./script/build.py \
-        || die "build fix failed"
+	# Make every subprocess calls fatal
+	sed -i -e 's/subprocess.call(/subprocess.check_call(/g' \
+		./script/build.py \
+		|| die "build fix failed"
 
-    # Fix missing libs in linking process (the ugly way)
-    sed -i -e 's/-lglib-2.0/-lglib-2.0 -lgconf-2 -lX11 -lXrandr -lXext/g' \
-        ./out/$(usex debug Debug Release)/obj/atom.ninja \
-        || die "linkage fix failed"
+	# Fix missing libs in linking process (the ugly way)
+	sed -i -e 's/-lglib-2.0/-lglib-2.0 -lgconf-2 -lX11 -lXrandr -lXext/g' \
+		./out/$(usex debug Debug Release)/obj/atom.ninja \
+		|| die "linkage fix failed"
 }
 
 src_compile() {
-    OUT=out/$(usex debug Debug Release)
-    ./script/build.py --configuration $(usex debug Debug Release) || die "Compilation failed"
-    echo "v$PV" > ${OUT}/version
-    cp LICENSE $OUT
+	OUT=out/$(usex debug Debug Release)
+	./script/build.py --configuration $(usex debug Debug Release) || die "Compilation failed"
+	echo "v$PV" > ${OUT}/version
+	cp LICENSE $OUT
 }
 
 src_install() {
-    prepall
+	prepall
 
-    into    /usr/share/atom
-    insinto /usr/share/atom
-    exeinto /usr/share/atom
+	into    /usr/share/atom
+	insinto /usr/share/atom
+	exeinto /usr/share/atom
 
-    cd ${OUT}
+	cd ${OUT}
 
-    doexe atom libchromiumcontent.so libffmpegsumo.so
+	doexe atom libchromiumcontent.so libffmpegsumo.so
 
-    doins -r resources
-    doins -r locales
-    doins version
-    doins LICENSE
-    doins icudtl.dat
-    doins content_shell.pak
+	doins -r resources
+	doins -r locales
+	doins version
+	doins LICENSE
+	doins icudtl.dat
+	doins content_shell.pak
 
-    dodoc LICENSE
+	dodoc LICENSE
 }
