@@ -1,0 +1,25 @@
+box: wercker-labs/docker
+build:
+  steps:
+    - script:
+        name: Populate local docker image
+        code: |
+          for image in $WERCKER_CACHE_DIR/docker-images/*.tgz; do
+            docker load < $image
+          done
+
+    - script:
+        name: Checking using repoman
+        code: |
+          docker run -v $(pwd):/overlay -i -t aegypius/overlay-env repoman full --pretend --verbose --include-dev
+
+  after-steps:
+    - script:
+        name: Store docker image to cache
+        code: |
+          if [ ! -d $WERCKER_CACHE_DIR/docker-images ]; then
+            mkdir $WERCKER_CACHE_DIR/docker-images
+          fi
+          for image in $(docker images | grep '^tests/' | awk '{ print $1 }'); do
+            docker save $image > $WERCKER_CACHE_DIR/docker-images/$(basename $image).tgz
+          done
