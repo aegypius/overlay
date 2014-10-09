@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -17,33 +17,33 @@ KEYWORDS="~amd64"
 RESTRICT="mirror"
 
 DEPEND="
-    app-shells/bash
+	app-shells/bash
 "
 RDEPEND="${DEPEND}
-    dev-vcs/git
+	dev-vcs/git
 "
 src_compile() {
-    true
+	true
 }
 
 src_install() {
-    exeinto /usr/bin
-    doexe git-flow
+	exeinto /usr/bin
+	doexe git-flow
 
-    insinto /usr/bin
-    doins git-flow-config
-    doins git-flow-feature
-    doins git-flow-hotfix
-    doins git-flow-init
-    doins git-flow-release
-    doins git-flow-support
-    doins git-flow-version
-    doins gitflow-common
-    doins gitflow-shFlags
+	insinto /usr/bin
+	doins git-flow-config
+	doins git-flow-feature
+	doins git-flow-hotfix
+	doins git-flow-init
+	doins git-flow-release
+	doins git-flow-support
+	doins git-flow-version
+	doins gitflow-common
+	doins gitflow-shFlags
 
-    insinto /usr/share/${PN}
-    doins -r hooks
+	insinto /usr/share/${PN}
+	doins -r hooks
 
-    newbashcomp "${FILESDIR}/${PN}-${PV}.bash-completion" ${PN}
+	newbashcomp "${FILESDIR}/${PN}-${PV}.bash-completion" ${PN}
 
 }
