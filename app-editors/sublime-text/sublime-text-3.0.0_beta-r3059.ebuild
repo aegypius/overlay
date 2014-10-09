@@ -21,7 +21,7 @@ SRC_URI="
 	x86?              ( ${COMMON_URI}/${MY_P}_${MY_V}_build_${MY_B}_x32.tar.bz2 )
 "
 
-LICENSE="Sublime"
+LICENSE="SublimeText"
 SLOT="3"
 KEYWORDS="~amd64 ~x86"
 RESTRICT="strip mirror"

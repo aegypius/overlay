@@ -16,7 +16,7 @@ HOMEPAGE="http://www.sublimetext.com"
 COMMON_URI="http://c758482.r82.cf2.rackcdn.com"
 SRC_URI="amd64? ( ${COMMON_URI}/${MY_P}%20${MY_V}%20x64.tar.bz2 )
          x86?   ( ${COMMON_URI}/${MY_P}%20${MY_V}.tar.bz2 )"
-LICENSE="Sublime"
+LICENSE="SublimeText"
 SLOT="2"
 KEYWORDS="~amd64 ~x86"
 IUSE=""

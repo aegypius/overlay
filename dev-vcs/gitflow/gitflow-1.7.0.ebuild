@@ -10,7 +10,7 @@ DESCRIPTION="AVH Edition of the git extensions to provide high-level repository 
 HOMEPAGE="https://github.com/petervanderdoes/gitflow"
 SRC_URI="https://github.com/petervanderdoes/gitflow/archive/${PV}.tar.gz"
 
-LICENSE="LGPL"
+LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64"
 # IUSE="bash-completion"
