@@ -51,15 +51,13 @@ src_unpack() {
 }
 
 src_prepare() {
-	default
-
 	# Skip atom-shell download
 	sed -i -e "s/defaultTasks = \['download-atom-shell', /defaultTasks = [/g" \
 	  ./build/Gruntfile.coffee \
 	  || die "Failed to fix Gruntfile"
 
 	# Skip atom-shell copy
-	epatch ${FILESDIR}/0002-skip-atom-shell-copy.patch
+	epatch "${FILESDIR}/0002-skip-atom-shell-copy.patch"
 
 	# Fix atom location guessing
 	sed -i -e 's/ATOM_PATH="$USR_DIRECTORY\/share\/atom/ATOM_PATH="$USR_DIRECTORY\/../g' \
@@ -68,9 +66,9 @@ src_prepare() {
 }
 
 src_compile() {
-	./script/build --verbose --build-dir ${T} || die "Failed to compile"
+	./script/build --verbose --build-dir "${T}" || die "Failed to compile"
 
-	${T}/Atom/resources/app/apm/node_modules/atom-package-manager/bin/apm rebuild || die "Failed to rebuild native module"
+	"${T}/Atom/resources/app/apm/node_modules/atom-package-manager/bin/apm" rebuild || die "Failed to rebuild native module"
 }
 
 src_install() {
@@ -82,7 +80,7 @@ src_install() {
 	insinto /usr/share/${PN}/resources/app
 	exeinto /usr/bin
 
-	cd ${T}/Atom/resources/app
+	cd "${T}/Atom/resources/app"
 	doicon resources/atom.png
 	dodoc LICENSE.md
 
