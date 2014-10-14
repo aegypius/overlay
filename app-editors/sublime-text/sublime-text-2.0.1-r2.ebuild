@@ -25,7 +25,6 @@ RESTRICT="mirror"
 RDEPEND="media-libs/libpng:1.2
 		 >=x11-libs/gtk+-2.24.8-r1:2"
 
-
 src_install() {
 	insinto ${MY_T}
 	into	${MY_T}
