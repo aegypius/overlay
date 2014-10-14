@@ -6,7 +6,7 @@ EAPI=5
 
 inherit bash-completion-r1
 
-DESCRIPTION="AVH Edition of the git extensions to provide high-level repository operations for Vincent Driessen's branching model"
+DESCRIPTION="AVH Edition of the git extensions for Vincent Driessen's branching model"
 HOMEPAGE="https://github.com/petervanderdoes/gitflow"
 SRC_URI="https://github.com/petervanderdoes/gitflow/archive/${PV}.tar.gz"
 
