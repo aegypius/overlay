@@ -4,7 +4,8 @@
 
 EAPI=5
 
-inherit git-2 flag-o-matic python
+PYTHON_COMPAT=( python2_7 )
+inherit git-2 flag-o-matic python-any-r1
 
 DESCRIPTION="Cross-platform desktop application shell"
 HOMEPAGE="https://github.com/atom/atom-shell"
@@ -25,6 +26,7 @@ fi
 IUSE="debug"
 
 DEPEND="
+	${PYTHON_DEPS}
 	sys-devel/llvm:0/3.4[clang]
 	dev-lang/python:2.7
 	>=net-libs/nodejs-0.10.29[npm]
@@ -47,21 +49,15 @@ QA_PRESTRIPPED="
 	/usr/share/atom/libffmpegsumo.so
 	/usr/share/atom/libchromiumcontent.so
 "
-
-PYTHON_DEPEND="2"
-RESTRICT_PYTHON_ABIS="3.*"
-
 src_unpack() {
 	git-2_src_unpack
 }
 
 pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
+	python-any-r1_pkg_setup
 
 	# Update npm config to use python 2
-	export PYTHON=$(PYTHON -a)
-	npm config set python $(PYTHON -a)
+	npm config set python $PYTHON
 }
 
 src_prepare() {

@@ -4,7 +4,8 @@
 
 EAPI=5
 
-inherit git-2 flag-o-matic python eutils
+PYTHON_COMPAT=( python2_7 )
+inherit git-2 flag-o-matic python-any-r1 eutils
 
 DESCRIPTION="A hackable text editor for the 21st Century"
 HOMEPAGE="https://atom.io"
@@ -25,6 +26,7 @@ fi
 IUSE=""
 
 DEPEND="
+	${PYTHON_DEPS}
 	>=dev-util/atom-shell-0.15.9
 	>=net-libs/nodejs-0.10.29[npm]
 "
@@ -33,17 +35,10 @@ RDEPEND="${DEPEND}"
 QA_PRESTRIPPED="
 	/usr/share/atom/node_modules/symbols-view/vendor/ctags-linux
 "
-
-PYTHON_DEPEND="2"
-RESTRICT_PYTHON_ABIS="3.*"
-
 pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
+	python-any-r1_pkg_setup
 
-	# Update npm config to use python 2
-	export PYTHON=$(PYTHON -a)
-	npm config set python $(PYTHON -a)
+	npm config set python $PYTHON
 }
 
 src_unpack() {
