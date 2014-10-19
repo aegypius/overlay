@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -15,7 +15,7 @@ DESCRIPTION="Sublime Text is a sophisticated text editor for code, html and pros
 HOMEPAGE="http://www.sublimetext.com"
 COMMON_URI="http://c758482.r82.cf2.rackcdn.com"
 SRC_URI="amd64? ( ${COMMON_URI}/${MY_P}%20${MY_V}%20x64.tar.bz2 )
-         x86?   ( ${COMMON_URI}/${MY_P}%20${MY_V}.tar.bz2 )"
+		 x86?   ( ${COMMON_URI}/${MY_P}%20${MY_V}.tar.bz2 )"
 LICENSE="SublimeText"
 SLOT="2"
 KEYWORDS="~amd64 ~x86"
@@ -23,12 +23,11 @@ IUSE=""
 RESTRICT="mirror"
 
 RDEPEND="media-libs/libpng:1.2
-	     >=x11-libs/gtk+-2.24.8-r1:2"
-
+		 >=x11-libs/gtk+-2.24.8-r1:2"
 
 src_install() {
 	insinto ${MY_T}
-	into    ${MY_T}
+	into	${MY_T}
 	exeinto ${MY_T}
 	doins -r "Icon"
 	doins -r "lib"
