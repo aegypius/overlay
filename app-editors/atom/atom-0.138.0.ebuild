@@ -27,7 +27,7 @@ IUSE=""
 
 DEPEND="
 	${PYTHON_DEPS}
-	>=dev-util/atom-shell-0.15.9
+	>=dev-util/atom-shell-0.18.1
 	>=net-libs/nodejs-0.10.29[npm]
 "
 RDEPEND="${DEPEND}"
