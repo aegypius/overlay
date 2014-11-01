@@ -29,6 +29,7 @@ DEPEND="
 	${PYTHON_DEPS}
 	>=dev-util/atom-shell-0.18.1
 	>=net-libs/nodejs-0.10.29[npm]
+	|| ( media-fonts/inconsolata media-fonts/inconsolata-dz )
 "
 RDEPEND="${DEPEND}"
 
