@@ -82,17 +82,15 @@ src_prepare() {
 		./script/build.py \
 		|| die "build fix failed"
 
-	# Fix missing libs in linking process (the ugly way)
-	sed -i -e 's/-lglib-2.0/-lglib-2.0 -lgconf-2 -lX11 -lXrandr -lXext/g' \
-		./out/$(usex debug Debug Release)/obj/atom.ninja \
-		|| die "linkage fix failed"
+	# Update ninja files
+	./script/update.py || die "update failed"
 }
 
 src_compile() {
 	OUT=out/$(usex debug Debug Release)
 	./script/build.py --configuration $(usex debug Debug Release) || die "Compilation failed"
-	echo "v$PV" > ${OUT}/version
-	cp LICENSE $OUT
+	echo "v$PV" > "${OUT}/version"
+	cp LICENSE "$OUT"
 }
 
 src_install() {
@@ -101,7 +99,7 @@ src_install() {
 	insinto /usr/share/atom
 	exeinto /usr/share/atom
 
-	cd ${OUT}
+	cd "${OUT}"
 
 	doexe atom libchromiumcontent.so libffmpegsumo.so
 
