@@ -27,8 +27,8 @@ IUSE=""
 
 DEPEND="
 	${PYTHON_DEPS}
-	>=dev-util/atom-shell-0.18.1
-	>=net-libs/nodejs-0.10.29[npm]
+	>=dev-util/atom-shell-0.19.2
+	>=net-libs/nodejs-0.10.30[npm]
 	|| ( media-fonts/inconsolata media-fonts/inconsolata-dz )
 "
 RDEPEND="${DEPEND}"
