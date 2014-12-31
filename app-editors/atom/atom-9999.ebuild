@@ -5,7 +5,7 @@
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
-inherit git-2 flag-o-matic python-any-r1 eutils
+inherit git-r3 flag-o-matic python-any-r1 eutils
 
 DESCRIPTION="A hackable text editor for the 21st Century"
 HOMEPAGE="https://atom.io"
@@ -27,7 +27,7 @@ IUSE=""
 
 DEPEND="
 	${PYTHON_DEPS}
-	>=dev-util/atom-shell-0.19.2
+	dev-util/atom-shell:0/19
 	>=net-libs/nodejs-0.10.30[npm]
 	media-fonts/inconsolata
 "
@@ -43,7 +43,7 @@ pkg_setup() {
 }
 
 src_unpack() {
-	git-2_src_unpack
+	git-r3_src_unpack
 }
 
 src_prepare() {
@@ -87,6 +87,7 @@ src_install() {
 	fperms +x /usr/share/${PN}/resources/app/atom.sh
 	fperms +x /usr/share/${PN}/resources/app/apm/node_modules/.bin/apm
 	fperms +x /usr/share/${PN}/resources/app/apm/node_modules/atom-package-manager/bin/node
+	fperms +x /usr/share/${PN}/resources/app/apm/node_modules/atom-package-manager/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js
 
 	# Symlinking to /usr/bin
 	dosym ../share/${PN}/resources/app/atom.sh /usr/bin/atom
