@@ -34,7 +34,7 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 QA_PRESTRIPPED="
-	/usr/share/atom/node_modules/symbols-view/vendor/ctags-linux
+	/usr/share/atom/resources/app/node_modules/symbols-view/vendor/ctags-linux
 "
 pkg_setup() {
 	python-any-r1_pkg_setup
@@ -65,6 +65,9 @@ src_compile() {
 	./script/build --verbose --build-dir "${T}" || die "Failed to compile"
 
 	"${T}/Atom/resources/app/apm/node_modules/atom-package-manager/bin/apm" rebuild || die "Failed to rebuild native module"
+
+	# Setup python path to builtin npm
+	echo "python = $PYTHON" >> "${T}/Atom/resources/app/apm/node_modules/atom-package-manager/.apmrc"
 }
 
 src_install() {
@@ -87,7 +90,7 @@ src_install() {
 	fperms +x /usr/share/${PN}/resources/app/atom.sh
 	fperms +x /usr/share/${PN}/resources/app/apm/node_modules/.bin/apm
 	fperms +x /usr/share/${PN}/resources/app/apm/node_modules/atom-package-manager/bin/node
-	fperms +x /usr/share/${PN}/resources/app/apm/node_modules/atom-package-manager/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js
+	fperms +x /usr/share/${PN}/resources/app/apm/node_modules/atom-package-manager/node_modules/npm/bin/node-gyp-bin/node-gyp
 
 	# Symlinking to /usr/bin
 	dosym ../share/${PN}/resources/app/atom.sh /usr/bin/atom
