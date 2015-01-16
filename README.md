@@ -1,6 +1,8 @@
 aegypius gentoo overlay
 =======================
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aegypius/overlay?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This is my personal gentoo overlay. I use it to customize some ebuilds to my needs
 
 Requirements
