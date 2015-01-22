@@ -1,21 +1,24 @@
 box: wercker-labs/docker
 build:
   steps:
-#    - script:
-#        name: Restore cached image to docker
-#        code: |-
-#          mkdir -p $WERCKER_CACHE_DIR/docker-images
-#          for image in $WERCKER_CACHE_DIR/docker-images/*.tgz; do docker load < $image; done
-#          docker pull aegypius/overlay-env
+    - script:
+        name: Restore cached image to docker
+        code: |-
+          mkdir "$WERCKER_CACHE_DIR/docker-images/"
+          if test -f "$WERCKER_CACHE_DIR/docker-images/overlay-env.tgz"; then docker load < "$WERCKER_CACHE_DIR/docker-images/overlay-env.tgz"; fi
+
+    - script:
+        name: Pull latest overlay-env
+        code: |-
+          docker pull aegypius/overlay-env:latest
 
     - script:
         name: Checking using repoman
         code: |-
-          docker run -v $(pwd):/overlay -i -t aegypius/overlay-env repoman full --pretend --verbose
+          docker run -v $(pwd):/overlay -i -t aegypius/overlay-env:latest repoman full --pretend --verbose
 
-#  after-steps:
-#    - script:
-#        name: Store docker image to cache
-#        code: |-
-#          for image in $(docker images | grep '^tests/' | awk '{ print $1 }'); do docker save $image > $WERCKER_CACHE_DIR/docker-images/$(basename $image).tgz; done
-#          docker save aegypius/overlay-env > $WERCKER_CACHE_DIR/docker-images/overlay-env.tgz
+  after-steps:
+    - script:
+        name: Store docker image to cache
+        code: |-
+          docker save aegypius/overlay-env > $WERCKER_CACHE_DIR/docker-images/overlay-env.tgz
