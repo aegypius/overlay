@@ -64,10 +64,10 @@ src_prepare() {
 src_compile() {
 	./script/build --verbose --build-dir "${T}" || die "Failed to compile"
 
-	"${T}/Atom/resources/app/apm/node_modules/atom-package-manager/bin/apm" rebuild || die "Failed to rebuild native module"
+	"${T}/Atom/resources/app/apm/bin/apm" rebuild || die "Failed to rebuild native module"
 
 	# Setup python path to builtin npm
-	echo "python = $PYTHON" >> "${T}/Atom/resources/app/apm/node_modules/atom-package-manager/.apmrc"
+	echo "python = $PYTHON" >> "${T}/Atom/resources/app/apm/.apmrc"
 }
 
 src_install() {
@@ -88,13 +88,13 @@ src_install() {
 
 	# Fixes permissions
 	fperms +x /usr/share/${PN}/resources/app/atom.sh
-	fperms +x /usr/share/${PN}/resources/app/apm/node_modules/.bin/apm
-	fperms +x /usr/share/${PN}/resources/app/apm/node_modules/atom-package-manager/bin/node
-	fperms +x /usr/share/${PN}/resources/app/apm/node_modules/atom-package-manager/node_modules/npm/bin/node-gyp-bin/node-gyp
+	fperms +x /usr/share/${PN}/resources/app/apm/bin/apm
+	fperms +x /usr/share/${PN}/resources/app/apm/bin/node
+	fperms +x /usr/share/${PN}/resources/app/apm/node_modules/npm/bin/node-gyp-bin/node-gyp
 
 	# Symlinking to /usr/bin
 	dosym ../share/${PN}/resources/app/atom.sh /usr/bin/atom
-	dosym ../share/${PN}/resources/app/apm/node_modules/atom-package-manager/bin/apm /usr/bin/apm
+	dosym ../share/${PN}/resources/app/apm/bin/apm /usr/bin/apm
 
 	make_desktop_entry "/usr/bin/atom %U" "Atom" "atom" "GNOME;GTK;Utility;TextEditor;Development;" "MimeType=text/plain;\nStartupNotify=true\nStartupWMClass=Atom"
 }
