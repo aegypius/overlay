@@ -5,6 +5,9 @@
     <title>{{ page.title }}</title>
     <link rel="stylesheet/less" type="text/css" href="assets/main.less">
     <script src="assets/components/less.js/dist/less.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var github = {{ site.github | json }};
+    </script>
   </head>
   <body class="{{ page.type }}">
     <a href="{{ site.github.repository_url }}">
