@@ -28,7 +28,7 @@ IUSE=""
 DEPEND="
 	${PYTHON_DEPS}
 	dev-util/atom-shell:0/21
-	>=net-libs/nodejs-0.10.30[npm]
+	net-libs/nodejs[npm]
 	media-fonts/inconsolata
 "
 RDEPEND="${DEPEND}"
@@ -49,16 +49,21 @@ src_unpack() {
 src_prepare() {
 	# Skip atom-shell download
 	sed -i -e "s/defaultTasks = \['download-atom-shell', /defaultTasks = [/g" \
-	  ./build/Gruntfile.coffee \
-	  || die "Failed to fix Gruntfile"
+		./build/Gruntfile.coffee \
+		|| die "Failed to fix Gruntfile"
 
 	# Skip atom-shell copy
 	epatch "${FILESDIR}/0002-skip-atom-shell-copy.patch"
 
 	# Fix atom location guessing
 	sed -i -e 's/ATOM_PATH="$USR_DIRECTORY\/share\/atom/ATOM_PATH="$USR_DIRECTORY\/../g' \
-	  ./atom.sh \
-	  || die "Fail fixing atom-shell directory"
+		./atom.sh \
+		|| die "Fail fixing atom-shell directory"
+
+	# Make bootstrap process more verbose
+	sed -i -e 's@node script/bootstrap@node script/bootstrap --no-quiet@g' \
+		./script/build \
+		|| die "Fail fixing verbosity of script/build"
 }
 
 src_compile() {
