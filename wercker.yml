@@ -5,9 +5,9 @@ build:
         name: Pull latest overlay-env
         code: |-
           mkdir "$WERCKER_CACHE_DIR/docker-images/"
-          if test -f "$WERCKER_CACHE_DIR/docker-images/overlay-env.tgz"; then docker load < "$WERCKER_CACHE_DIR/docker-images/overlay-env.tgz"; fi
-          docker pull aegypius/overlay-env:latest
-          docker save aegypius/overlay-env:latest > "$WERCKER_CACHE_DIR/docker-images/overlay-env.tgz"
+          if test -f "$WERCKER_CACHE_DIR/docker-images/repoman.tgz"; then docker load < "$WERCKER_CACHE_DIR/docker-images/repoman.tgz"; fi
+          docker pull aegypius/repoman:latest
+          docker save aegypius/repoman:latest > "$WERCKER_CACHE_DIR/docker-images/repoman.tgz"
 
     - script:
         name: List docker images (debug)
@@ -17,4 +17,4 @@ build:
     - script:
         name: Checking using repoman
         code: |-
-          docker run -v $(pwd):/overlay -i -t aegypius/overlay-env:latest repoman full --include-dev --pretend --verbose
+          docker run -v $(pwd):/overlay -i -t aegypius/repoman:latest full --include-dev --pretend --verbose
