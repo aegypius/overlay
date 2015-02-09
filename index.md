@@ -2,7 +2,8 @@
 layout: default
 title: aegypius/overlay @ GitHub
 ---
-
+[![Wercker](https://img.shields.io/wercker/ci/53da278938296a86630000b9.svg?style=flat-square)]()
+[![GitHub stars](https://img.shields.io/github/stars/aegypius/overlay.svg?style=flat-square)]()
 
 ## Usage
 
