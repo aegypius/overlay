@@ -29,7 +29,7 @@ DEPEND="
 	${PYTHON_DEPS}
 	sys-devel/llvm:0/3.5[clang]
 	dev-lang/python:2.7
-	net-libs/nodejs[npm]
+	=net-libs/nodejs-0.10*[npm]
 	x11-libs/gtk+:2
 	x11-libs/libnotify
 	gnome-base/libgnome-keyring
