@@ -41,6 +41,7 @@ DEPEND="
 	sys-libs/libcap
 	x11-libs/libXtst
 	x11-libs/pango
+	dev-util/ninja
 "
 RDEPEND="${DEPEND}
 	!<app-editors/atom-0.120.0
