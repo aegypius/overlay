@@ -47,8 +47,8 @@ src_unpack() {
 }
 
 src_prepare() {
-	# Skip atom-shell download
-	sed -i -e "s/defaultTasks = \['download-atom-shell', /defaultTasks = [/g" \
+	# Skip atom-shell & atom-shell-chromedriver download
+	sed -i -e "s/defaultTasks = \['download-atom-shell', 'download-atom-shell-chromedriver', /defaultTasks = [/g" \
 		./build/Gruntfile.coffee \
 		|| die "Failed to fix Gruntfile"
 
