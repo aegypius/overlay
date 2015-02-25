@@ -1,15 +1,6 @@
-box: wercker-labs/docker
+box: aegypius/repoman
 build:
   steps:
     - script:
-        name: Pull latest repoman
-        code: |-
-          mkdir "$WERCKER_CACHE_DIR/docker-images/"
-          if test -f "$WERCKER_CACHE_DIR/docker-images/repoman.tgz"; then docker load < "$WERCKER_CACHE_DIR/docker-images/repoman.tgz"; fi
-          docker pull aegypius/repoman:latest
-          docker save aegypius/repoman:latest > "$WERCKER_CACHE_DIR/docker-images/repoman.tgz"
-
-    - script:
         name: Checking using repoman
-        code: |-
-          docker run -v $(pwd):/overlay -i -t aegypius/repoman:latest full --include-dev --pretend --verbose
+        code: repoman full --include-dev --pretend --verbose

@@ -1,2 +1,9 @@
 .vagrant
+
+# Ignore gh-page build folder
 _site
+
+# Ignore wercker local build folders
+_builds
+_projects
+_steps
