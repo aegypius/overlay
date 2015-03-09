@@ -85,6 +85,9 @@ src_prepare() {
 
 	# Update ninja files
 	./script/update.py || die "update failed"
+
+	# Filter -msahf CFLAGS/CXXFLAGS
+	filter-flags -msahf
 }
 
 src_compile() {
