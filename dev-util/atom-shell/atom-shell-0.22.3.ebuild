@@ -14,7 +14,7 @@ SRC_URI=""
 EGIT_REPO_URI="git://github.com/atom/atom-shell"
 
 LICENSE="MIT"
-SLOT="0/21"
+SLOT="0/22"
 
 if [[ ${PV} == *9999 ]];then
 	KEYWORDS=""
