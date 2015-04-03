@@ -27,7 +27,7 @@ IUSE=""
 
 DEPEND="
 	${PYTHON_DEPS}
-	dev-util/atom-shell:0/21
+	dev-util/atom-shell:0/22
 	|| ( net-libs/nodejs[npm] net-libs/iojs[npm] )
 	media-fonts/inconsolata
 "
