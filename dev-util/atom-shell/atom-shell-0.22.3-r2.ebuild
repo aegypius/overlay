@@ -27,7 +27,7 @@ IUSE="debug"
 
 DEPEND="
 	${PYTHON_DEPS}
-	sys-devel/llvm:0/3.5[clang]
+	>=sys-devel/llvm-3.5.0[clang]
 	dev-lang/python:2.7
 	|| ( net-libs/nodejs[npm] net-libs/iojs[npm] )
 	x11-libs/gtk+:2
