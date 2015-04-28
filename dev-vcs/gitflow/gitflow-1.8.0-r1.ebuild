@@ -17,7 +17,7 @@ KEYWORDS="~amd64"
 RESTRICT="mirror"
 
 DEPEND="
-	app-shells/bash
+	app-shells/bash:=
 "
 RDEPEND="${DEPEND}
 	dev-vcs/git
