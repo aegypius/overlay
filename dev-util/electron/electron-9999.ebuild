@@ -1,20 +1,20 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
+# $Header: $
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
 inherit git-r3 flag-o-matic python-any-r1
 
-DESCRIPTION="Cross-platform desktop application shell"
-HOMEPAGE="https://github.com/atom/atom-shell"
+DESCRIPTION="Build cross platform desktop apps with web technologies"
+HOMEPAGE="http://electron.atom.io"
 SRC_URI=""
 
-EGIT_REPO_URI="git://github.com/atom/atom-shell"
+EGIT_REPO_URI="git://github.com/atom/electron"
 
 LICENSE="MIT"
-SLOT="0/22"
+SLOT="0.25"
 
 if [[ ${PV} == *9999 ]];then
 	KEYWORDS=""
@@ -29,7 +29,7 @@ DEPEND="
 	${PYTHON_DEPS}
 	>=sys-devel/llvm-3.5.0[clang]
 	dev-lang/python:2.7
-	|| ( <net-libs/nodejs-0.12.6[npm] net-libs/iojs[npm] )
+	|| ( net-libs/nodejs[npm] net-libs/iojs[npm] )
 	x11-libs/gtk+:2
 	x11-libs/libnotify
 	gnome-base/libgnome-keyring
@@ -42,11 +42,8 @@ DEPEND="
 	x11-libs/libXtst
 	x11-libs/pango
 	dev-util/ninja
-	sys-libs/ncurses:*[tinfo]
 "
-RDEPEND="${DEPEND}
-	!<app-editors/atom-0.120.0
-"
+RDEPEND="${DEPEND}"
 
 QA_PRESTRIPPED="
 	/usr/share/atom/libffmpegsumo.so
@@ -64,7 +61,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	einfo "Bootstrap atom-shell source"
+	einfo "Bootstrap electron source"
 
 	# Fix util.execute function to be more verbose
 	sed -i -e 's/def execute(argv):/def execute(argv):\n  print "   - bootstrap: " + " ".join(argv)/g' \
