@@ -1,20 +1,20 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
 inherit git-r3 flag-o-matic python-any-r1
 
-DESCRIPTION="Build cross platform desktop apps with web technologies"
-HOMEPAGE="http://electron.atom.io"
+DESCRIPTION="Build Cross-platform desktop application shell with web technologies"
+HOMEPAGE="https://electron.atom.io"
 SRC_URI=""
 
 EGIT_REPO_URI="git://github.com/atom/electron"
 
 LICENSE="MIT"
-SLOT="0.25"
+SLOT="0/22"
 
 if [[ ${PV} == *9999 ]];then
 	KEYWORDS=""
@@ -29,7 +29,7 @@ DEPEND="
 	${PYTHON_DEPS}
 	>=sys-devel/llvm-3.5.0[clang]
 	dev-lang/python:2.7
-	|| ( net-libs/nodejs[npm] net-libs/iojs[npm] )
+	|| ( >=net-libs/nodejs-0.12.0[npm] net-libs/iojs[npm] )
 	x11-libs/gtk+:2
 	x11-libs/libnotify
 	gnome-base/libgnome-keyring
@@ -42,13 +42,12 @@ DEPEND="
 	x11-libs/libXtst
 	x11-libs/pango
 	dev-util/ninja
+	sys-libs/ncurses:*[tinfo]
 "
 RDEPEND="${DEPEND}"
 
-QA_PRESTRIPPED="
-	/usr/share/atom/libffmpegsumo.so
-	/usr/share/atom/libchromiumcontent.so
-"
+QA_PRESTRIPPED=""
+
 src_unpack() {
 	git-r3_src_unpack
 }
@@ -57,58 +56,20 @@ pkg_setup() {
 	python-any-r1_pkg_setup
 
 	# Update npm config to use python 2
-	npm config set python $PYTHON
+	# npm config set python $PYTHON
 }
 
 src_prepare() {
-	einfo "Bootstrap electron source"
+	einfo "npm version: "
+	einfo $(npm version)
 
-	# Fix util.execute function to be more verbose
-	sed -i -e 's/def execute(argv):/def execute(argv):\n  print "   - bootstrap: " + " ".join(argv)/g' \
-	  ./script/lib/util.py \
-	  || die "Failed to sed lib/util.py"
-
-	# Bootstrap
-	./script/bootstrap.py || die "bootstrap failed"
-
-	# Fix libudev.so.0 link
-	sed -i -e 's/libudev.so.0/libudev.so.1/g' \
-		./vendor/brightray/vendor/download/libchromiumcontent/Release/libchromiumcontent.so \
-		|| die "libudev fix failed"
-
-	# Make every subprocess calls fatal
-	sed -i -e 's/subprocess.call(/subprocess.check_call(/g' \
-		./script/build.py \
-		|| die "build fix failed"
-
-	# Update ninja files
-	./script/update.py || die "update failed"
+	$PYTHON script/bootstrap.py --verbose --dev || die "Failed to bootstrap electron"
 }
 
 src_compile() {
-	OUT=out/$(usex debug Debug Release)
-	./script/build.py --configuration $(usex debug Debug Release) || die "Compilation failed"
-	echo "v$PV" > "${OUT}/version"
-	cp LICENSE "$OUT"
+	$PYTHON script/build.py --configuration $(usex debug Debug Release) || die "Failed to bootstrap electron"
 }
 
 src_install() {
-
-	into	/usr/share/atom
-	insinto /usr/share/atom
-	exeinto /usr/share/atom
-
-	cd "${OUT}"
-
-	doexe atom libchromiumcontent.so libffmpegsumo.so
-
-	doins -r resources
-	doins -r locales
-	doins version
-	doins LICENSE
-	doins icudtl.dat
-	doins content_shell.pak
-	doins natives_blob.bin
-	doins snapshot_blob.bin
-
+	die "installing"
 }
