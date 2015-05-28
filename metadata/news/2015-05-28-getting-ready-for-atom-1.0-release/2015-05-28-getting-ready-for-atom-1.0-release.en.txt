@@ -1,0 +1,17 @@
+Title: Getting ready for atom 1.0 release
+Author: Nicolas LAURENT <github@aegypius.com>
+Content-Type: text/plain
+Poster: 2015-05-28
+Revision: 1
+News-Item-Format: 1.0
+Display-If-Installed: <app-editors/atom-1.0
+
+Atom is getting close to a release. This unofficial overlay will update ebuilds
+to getting closer to the official released binaries.
+
+1. `dev-util/atom-shell` and `app-editors/atom` ebuilds prior to 1.0 will be
+   hardmasked and removed 30 days after that
+
+2. `app-editors/atom` will integrate `electron` compilation
+
+You can open issues to react to this on https://github.com/aegypius/overlay/issues
