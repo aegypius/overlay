@@ -15,6 +15,7 @@ RESTRICT="primaryuri"
 
 KEYWORDS="~amd64"
 SLOT="0"
+LICENSE="MIT"
 
 IUSE=""
 
@@ -53,8 +54,8 @@ pkg_setup() {
 
 src_unpack() {
 	unpacker_src_unpack
-	mkdir -p ${S}
-	mv "${WORKDIR}/usr" ${S}
+	mkdir -p "${S}"
+	mv "${WORKDIR}/usr" "${S}"
 }
 
 src_prepare() {
