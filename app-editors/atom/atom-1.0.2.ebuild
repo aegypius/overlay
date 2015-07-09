@@ -7,7 +7,7 @@ EAPI=5
 PYTHON_COMPAT=( python2_7 )
 inherit flag-o-matic python-any-r1 eutils unpacker
 
-DESCRIPTION="A hackable text editor for the 21st Century"
+DESCRIPTION="A hackable text editor for the 21st Century."
 HOMEPAGE="https://atom.io"
 SRC_URI="https://github.com/atom/atom/releases/download/v${PV}/atom-amd64.deb"
 
@@ -55,6 +55,10 @@ src_unpack() {
 	unpacker_src_unpack
 	mkdir -p ${S}
 	mv "${WORKDIR}/usr" ${S}
+}
+
+src_prepare() {
+	rm -r "${S}/usr/share/applications"
 }
 
 src_install() {
