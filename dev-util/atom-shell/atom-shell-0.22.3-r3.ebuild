@@ -29,7 +29,7 @@ DEPEND="
 	${PYTHON_DEPS}
 	>=sys-devel/llvm-3.5.0[clang]
 	dev-lang/python:2.7
-	|| ( net-libs/nodejs[npm] net-libs/iojs[npm] )
+	|| ( <net-libs/nodejs-0.12.6[npm] net-libs/iojs[npm] )
 	x11-libs/gtk+:2
 	x11-libs/libnotify
 	gnome-base/libgnome-keyring
@@ -45,6 +45,7 @@ DEPEND="
 "
 RDEPEND="${DEPEND}
 	!<app-editors/atom-0.120.0
+	!>app-edtiors/atom-1.0.2
 "
 
 QA_PRESTRIPPED="
