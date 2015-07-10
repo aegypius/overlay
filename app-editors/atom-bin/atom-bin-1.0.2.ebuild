@@ -19,10 +19,13 @@ LICENSE="MIT"
 
 IUSE=""
 
+MY_PN="atom"
+
 DEPEND="
 	${PYTHON_DEPS}
 	media-fonts/inconsolata
 	!!dev-util/atom-shell
+	!app-editors/atom
 "
 RDEPEND="${DEPEND}
 	x11-libs/gtk+:2
@@ -71,12 +74,12 @@ src_install() {
 
 	# Fixes permissions
 	fperms +x /usr/bin/atom
-	fperms +x /usr/share/${PN}/${PN}
-	fperms +x /usr/share/${PN}/resources/app/atom.sh
-	fperms +x /usr/share/${PN}/resources/app/apm/bin/apm
-	fperms +x /usr/share/${PN}/resources/app/apm/bin/node
-	fperms +x /usr/share/${PN}/resources/app/apm/node_modules/npm/bin/node-gyp-bin/node-gyp
-	fperms +x /usr/share/${PN}/resources/app.asar.unpacked/node_modules/symbols-view/vendor/ctags-linux
+	fperms +x /usr/share/${MY_PN}/${MY_PN}
+	fperms +x /usr/share/${MY_PN}/resources/app/atom.sh
+	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/apm
+	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/node
+	fperms +x /usr/share/${MY_PN}/resources/app/apm/node_modules/npm/bin/node-gyp-bin/node-gyp
+	fperms +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/symbols-view/vendor/ctags-linux
 
 	make_desktop_entry "/usr/bin/atom %U" "Atom" "atom" \
 		"GNOME;GTK;Utility;TextEditor;Development;" \
