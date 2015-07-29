@@ -9,7 +9,7 @@ inherit flag-o-matic python-any-r1 eutils unpacker
 
 DESCRIPTION="A hackable text editor for the 21st Century."
 HOMEPAGE="https://atom.io"
-SRC_URI="https://github.com/atom/atom/releases/download/v${PV}/atom-amd64.deb"
+SRC_URI="https://github.com/atom/atom/releases/download/v${PV}/atom-amd64.deb -> atom-${PV}.deb"
 
 RESTRICT="primaryuri"
 
