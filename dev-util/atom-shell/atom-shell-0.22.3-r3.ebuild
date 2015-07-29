@@ -42,10 +42,10 @@ DEPEND="
 	x11-libs/libXtst
 	x11-libs/pango
 	dev-util/ninja
+	sys-libs/ncurses[tinfo]
 "
 RDEPEND="${DEPEND}
 	!<app-editors/atom-0.120.0
-	!>app-edtiors/atom-1.0.2
 "
 
 QA_PRESTRIPPED="
