@@ -5,4 +5,7 @@
 		<email>aegypius@github.com</email>
 		<name>aegypius</name>
 	</maintainer>
+	<use>
+		<flag name="rebuild">Force rebuilding all apm modules</flag>
+	</use>
 </pkgmetadata>
