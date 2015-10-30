@@ -33,9 +33,9 @@ DEPEND="
 	x11-libs/gtk+:2
 	x11-libs/libnotify
 	gnome-base/libgnome-keyring
+	gnome-base/gconf
 	dev-libs/nss
 	dev-libs/nspr
-	gnome-base/gconf
 	media-libs/alsa-lib
 	net-print/cups
 	sys-libs/libcap
