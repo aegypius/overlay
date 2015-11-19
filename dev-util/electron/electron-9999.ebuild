@@ -63,10 +63,12 @@ src_prepare() {
 	einfo "npm version: "
 	einfo $(npm version)
 
-	$PYTHON script/bootstrap.py --verbose --dev || die "Failed to bootstrap electron"
+	$PYTHON script/bootstrap.py --verbose || die "Failed to bootstrap electron"
 }
 
 src_compile() {
+	# epatch "${FILESDIR}/${PN}-fix-static-locations.patch" || die "Failed to patch"
+
 	$PYTHON script/build.py --configuration $(usex debug Debug Release) || die "Failed to bootstrap electron"
 }
 
