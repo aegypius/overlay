@@ -1,0 +1,6 @@
+# aegypius                       (07 Mar 2016)
+# Source build are unavailable for now.
+# Feel free to contribute to provide updates at
+# https://github.com/aegypius/overlay/issues
+app-editors/atom
+dev-util/atom-shell
