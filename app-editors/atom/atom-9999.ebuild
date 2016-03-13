@@ -23,11 +23,11 @@ else
 	EGIT_COMMIT="v${PV}"
 fi
 
-IUSE=""
+IUSE="rebuild"
 
 DEPEND="
 	${PYTHON_DEPS}
-	dev-util/atom-shell:0/22
+	dev-util/electron
 	|| ( net-libs/nodejs[npm] net-libs/iojs[npm] )
 	media-fonts/inconsolata
 "
@@ -69,10 +69,12 @@ src_prepare() {
 src_compile() {
 	./script/build --verbose --build-dir "${T}" || die "Failed to compile"
 
-	"${T}/Atom/resources/app/apm/bin/apm" rebuild || die "Failed to rebuild native module"
-
 	# Setup python path to builtin npm
 	echo "python = $PYTHON" >> "${T}/Atom/resources/app/apm/.apmrc"
+
+	if use rebuild; then
+		"${T}/Atom/resources/app/apm/bin/apm" rebuild || die "Failed to rebuild native module"
+	fi
 }
 
 src_install() {

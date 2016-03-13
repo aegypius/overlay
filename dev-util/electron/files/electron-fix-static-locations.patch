@@ -1,0 +1,32 @@
+--- out/R/obj/electron.ninja.orig	2015-11-16 12:58:55.278509799 +0000
++++ out/R/obj/electron.ninja	2015-11-16 12:59:07.179022293 +0000
+@@ -9,16 +9,16 @@
+ 
+ build libnode.so: copy lib/libnode.so || obj/electron.actions_depends.stamp
+ build icudtl.dat: copy $
+-    /var/tmp/portage/dev-util/electron-9999/work/electron-9999/vendor/brightray/vendor/download/libchromiumcontent/static_library/icudtl.dat $
++    /var/tmp/portage/dev-util/electron-9999/work/electron-9999/vendor/brightray/vendor/download/libchromiumcontent/shared_library/icudtl.dat $
+     || obj/electron.actions_depends.stamp
+ build content_shell.pak: copy $
+-    /var/tmp/portage/dev-util/electron-9999/work/electron-9999/vendor/brightray/vendor/download/libchromiumcontent/static_library/content_shell.pak $
++    /var/tmp/portage/dev-util/electron-9999/work/electron-9999/vendor/brightray/vendor/download/libchromiumcontent/shared_library/content_shell.pak $
+     || obj/electron.actions_depends.stamp
+ build natives_blob.bin: copy $
+-    /var/tmp/portage/dev-util/electron-9999/work/electron-9999/vendor/brightray/vendor/download/libchromiumcontent/static_library/natives_blob.bin $
++    /var/tmp/portage/dev-util/electron-9999/work/electron-9999/vendor/brightray/vendor/download/libchromiumcontent/shared_library/natives_blob.bin $
+     || obj/electron.actions_depends.stamp
+ build snapshot_blob.bin: copy $
+-    /var/tmp/portage/dev-util/electron-9999/work/electron-9999/vendor/brightray/vendor/download/libchromiumcontent/static_library/snapshot_blob.bin $
++    /var/tmp/portage/dev-util/electron-9999/work/electron-9999/vendor/brightray/vendor/download/libchromiumcontent/shared_library/snapshot_blob.bin $
+     || obj/electron.actions_depends.stamp
+ build resources/default_app: copy ../../atom/browser/default_app || $
+     obj/electron.actions_depends.stamp
+@@ -40,7 +40,7 @@
+     -I/var/tmp/portage/dev-util/electron-9999/work/electron-9999/vendor/brightray/vendor/download/libchromiumcontent/src/third_party/icu/source/common $
+     -I/var/tmp/portage/dev-util/electron-9999/work/electron-9999/vendor/brightray/vendor/download/libchromiumcontent/src/third_party/mojo/src $
+     -I/var/tmp/portage/dev-util/electron-9999/work/electron-9999/vendor/brightray/vendor/download/libchromiumcontent/src/third_party/WebKit $
+-    -I/var/tmp/portage/dev-util/electron-9999/work/electron-9999/vendor/brightray/vendor/download/libchromiumcontent/static_library/gen
++    -I/var/tmp/portage/dev-util/electron-9999/work/electron-9999/vendor/brightray/vendor/download/libchromiumcontent/shared_library/gen
+ cflags = -pthread -I/usr/include/gtk-2.0 -I/usr/lib64/gtk-2.0/include $
+     -I/usr/include/pango-1.0 -I/usr/include/atk-1.0 -I/usr/include/cairo $
+     -I/usr/include/pixman-1 -I/usr/include/pango-1.0 $
