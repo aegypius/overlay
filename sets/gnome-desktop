@@ -1,3 +1,4 @@
->=gnome-base/gnome-3.10.0
+x11-base/xorg-drivers
+>=gnome-base/gnome-3.18.0
 www-client/chromium
 www-plugins/chrome-binary-plugins
