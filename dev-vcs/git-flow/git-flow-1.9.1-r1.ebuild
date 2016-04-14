@@ -35,7 +35,6 @@ S="${WORKDIR}/${MY_PN}-${PV}"
 src_unpack() {
 	default
 	mv "gitflow-avh-${PV}" "${S}"
-	eapply "${FILESDIR}/0001-append-complete-command.patch"
 }
 
 src_compile() {
