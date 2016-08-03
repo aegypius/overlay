@@ -7,3 +7,5 @@ app-misc/tmux
 sys-process/htop
 dev-vcs/hub
 media-sound/spotify
+net-dns/dnsmasq
+app-shells/bash-completion

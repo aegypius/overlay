@@ -1,3 +1,10 @@
 @aegypius-desktop
 @developer-desktop
 net-im/slack-desktop-bin
+dev-vcs/git-flow
+app-office/libreoffice-bin
+dev-db/mariadb
+net-fs/autofs
+net-misc/rdesktop
+net-misc/networkmanager-openvpn
+net-misc/networkmanager-pptp
