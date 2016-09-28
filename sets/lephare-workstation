@@ -1,6 +1,6 @@
 @aegypius-desktop
 @developer-desktop
-net-im/slack-desktop-bin
+net-im/slack-bin
 dev-vcs/git-flow
 app-office/libreoffice-bin
 dev-db/mariadb
