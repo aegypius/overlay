@@ -1,0 +1,3 @@
+gnome-base/gnome-extra-apps -games
+app-emulation/docker -device-mapper overlay
+sci-geosciences/gpsd python
