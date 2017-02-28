@@ -7,6 +7,12 @@ title: aegypius/overlay @ GitHub
 
 ## Usage
 
+### Using [standard method](https://wiki.gentoo.org/wiki//etc/portage/repos.conf)
+
+You can setup this overlay by running this one-liner:
+
+    curl -sL https://aegypius.github.io/overlay/aegypius.conf | sudo tee -a /etc/portage/repos.conf.d/aegypius.conf
+
 ### Using layman
 
 Add this overlay to you [Layman](http://layman.sourceforge.net/) overlays with:
