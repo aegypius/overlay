@@ -1,4 +1,4 @@
-theme: jekyll-theme-slate
+theme: minima
 exclude:
   - 'bower.json'
   - '.bowerrc'
