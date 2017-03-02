@@ -1,5 +1,4 @@
-highlighter: pygments
-
+theme: jekyll-theme-slate
 exclude:
   - 'bower.json'
   - '.bowerrc'

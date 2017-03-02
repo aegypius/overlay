@@ -1,1 +1,7 @@
-_site
+### https://raw.github.com/github/gitignore/80c5f1c6f5cb514416531a4413b85fcba63fb8e9/Jekyll.gitignore
+
+_site/
+.sass-cache/
+.jekyll-metadata
+
+
