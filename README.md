@@ -25,4 +25,4 @@ Add this overlay this:
     layman -o https://aegypius.github.io/overlay/repositories.xml -f -a aegypius
 
 ---
-[![wercker status](https://app.wercker.com/status/bd52c911760a9b3b9d77f6cd7ad6995b/s/master "wercker status")](https://app.wercker.com/project/bykey/bd52c911760a9b3b9d77f6cd7ad6995b)
+[![Build Status](https://travis-ci.org/aegypius/overlay.svg?branch=master)](https://travis-ci.org/aegypius/overlay)

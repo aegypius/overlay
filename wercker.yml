@@ -1,6 +1,0 @@
-box: aegypius/repoman
-build:
-  steps:
-    - script:
-        name: Checking using repoman
-        code: repoman full --include-dev --pretend --verbose

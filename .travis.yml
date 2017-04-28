@@ -1,0 +1,11 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker pull aegypius/repoman
+
+script:
+  - docker run aegypius/repoman --version
+  - docker run -v $(pwd):/overlay aegypius/repoman full --include-dev --pretend --verbose
