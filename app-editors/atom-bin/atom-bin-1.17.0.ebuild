@@ -43,7 +43,7 @@ RDEPEND="${DEPEND}
 
 QA_PRESTRIPPED="
 	/usr/share/atom/atom
-  /usr/share/atom/libnode.so
+	/usr/share/atom/libnode.so
 	/usr/share/atom/chromedriver/chromedriver
 	/usr/share/atom/libffmpeg.so
 	/usr/share/atom/libnotify.so.4
