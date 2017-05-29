@@ -43,12 +43,13 @@ RDEPEND="${DEPEND}
 
 QA_PRESTRIPPED="
 	/usr/share/atom/atom
+	/usr/share/atom/libnode.so
 	/usr/share/atom/chromedriver/chromedriver
-	/usr/share/atom/libffmpegsumo.so
+	/usr/share/atom/libffmpeg.so
 	/usr/share/atom/libnotify.so.4
 	/usr/share/atom/libchromiumcontent.so
 	/usr/share/atom/libgcrypt.so.11
-	/usr/share/atom/resources/app.asar.unpacked/node_modules/symbols-view/vendor/ctags-linux
+	/usr/share/atom/resources/app/node_modules/symbols-view/vendor/ctags-linux
 "
 
 pkg_setup() {
@@ -79,7 +80,7 @@ src_install() {
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/apm
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/node
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/node_modules/npm/bin/node-gyp-bin/node-gyp
-	fperms +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/symbols-view/vendor/ctags-linux
+	fperms +x /usr/share/${MY_PN}/resources/app/node_modules/symbols-view/vendor/ctags-linux
 
 	make_desktop_entry "/usr/bin/atom %U" "Atom" "atom" \
 		"GNOME;GTK;Utility;TextEditor;Development;" \
