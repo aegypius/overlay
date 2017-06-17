@@ -78,9 +78,14 @@ src_install() {
 	fperms +x /usr/share/${MY_PN}/${MY_PN}
 	fperms +x /usr/share/${MY_PN}/resources/app/atom.sh
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/apm
+	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/npm
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/node
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/node_modules/npm/bin/node-gyp-bin/node-gyp
 	fperms +x /usr/share/${MY_PN}/resources/app/node_modules/symbols-view/vendor/ctags-linux
+	fperms +x /usr/share/${MY_PN}/resources/app/node_modules/github/bin/*
+	fperms +x /usr/share/${MY_PN}/resources/app/node_modules/dugite/git/bin/*
+	fperms +x /usr/share/${MY_PN}/resources/app/node_modules/dugite/git/libexec/git-core/*
+	fperms +x /usr/share/${MY_PN}/resources/app/node_modules/dugite/git/libexec/git-core/mergetools/*
 
 	make_desktop_entry "/usr/bin/atom %U" "Atom" "atom" \
 		"GNOME;GTK;Utility;TextEditor;Development;" \
