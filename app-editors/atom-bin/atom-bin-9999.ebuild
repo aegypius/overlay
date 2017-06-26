@@ -2,19 +2,21 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
-inherit flag-o-matic python-any-r1 eutils unpacker
+inherit flag-o-matic python-any-r1 eutils unpacker pax-utils
 
 MY_PN="atom"
 MY_PV="1.18.0"
 
 DESCRIPTION="A hackable text editor for the 21st Century."
 HOMEPAGE="https://atom.io"
-SRC_URI="https://github.com/atom/atom/releases/download/v${MY_PV}/atom-amd64.deb -> atom-${MY_PV}.deb"
+SRC_URI="
+	amd64? ( https://github.com/${MY_PN}/${MY_PN}/releases/download/v${MY_PV}/${MY_PN}-amd64.tar.gz -> ${MY_PN}-${PV}.tar.gz )
+"
 
-RESTRICT="primaryuri"
+RESTRICT="mirror"
 
 KEYWORDS=""
 SLOT="0"
@@ -22,8 +24,7 @@ LICENSE="MIT"
 
 IUSE="-debug"
 
-DEPEND="
-	${PYTHON_DEPS}
+DEPEND="${PYTHON_DEPS}
 	media-fonts/inconsolata
 	!!dev-util/atom-shell
 	!app-editors/atom
@@ -43,56 +44,57 @@ RDEPEND="${DEPEND}
 "
 
 QA_PRESTRIPPED="
-	/usr/share/atom/atom
-	/usr/share/atom/libnode.so
-	/usr/share/atom/chromedriver/chromedriver
-	/usr/share/atom/libffmpeg.so
-	/usr/share/atom/libnotify.so.4
-	/usr/share/atom/libchromiumcontent.so
-	/usr/share/atom/libgcrypt.so.11
-	/usr/share/atom/resources/app/node_modules/symbols-view/vendor/ctags-linux
-	/usr/share/atom/resources/app/node_modules/dugite/git/libexec/git-core/git-lfs
+	/usr/share/${MY_PN}/${MY_PN}
+	/usr/share/${MY_PN}/chromedriver/chromedriver
+	/usr/share/${MY_PN}/libnode.so
+	/usr/share/${MY_PN}/libffmpeg.so
+	/usr/share/${MY_PN}/libnotify.so.4
+	/usr/share/${MY_PN}/libchromiumcontent.so
+	/usr/share/${MY_PN}/libgcrypt.so.11
+	/usr/share/${MY_PN}/resources/app/node_modules/symbols-view/vendor/ctags-linux
+	/usr/share/${MY_PN}/resources/app/node_modules/dugite/git/libexec/git-core/git-lfs
 "
+
+ARCH=$(getconf LONG_BIT)
+
+[[ ${ARCH} == "64" ]] && S="${WORKDIR}/${MY_PN}-${MY_PV}-amd64"
 
 pkg_setup() {
 	python-any-r1_pkg_setup
 }
 
-src_unpack() {
-	unpacker_src_unpack
-	mkdir -p "${S}"
-	mv "${WORKDIR}/usr" "${S}"
-}
-
 src_prepare() {
-	rm -r "${S}/usr/share/applications"
+	eapply_user
 }
 
 src_install() {
+	pax-mark m ${MY_PN}
 
-	into	/
-	insinto /
-
-	#
+	insinto /usr/share/${MY_PN}
 	doins -r .
+	doicon ${MY_PN}.png
+	insinto /usr/share/doc/${MY_PN}
+	newins resources/LICENSE.md copyright
+	newbin "${FILESDIR}/${PN}" ${MY_PN}
+	insinto /usr/share/lintian/overrides
+	newins "${FILESDIR}/${PN}-lintian" ${MY_PN}
+	dosym /usr/share/${MY_PN}/resources/app/apm/bin/apm /usr/bin/apm
 
 	# Fixes permissions
-	fperms +x /usr/bin/atom
+	fperms +x /usr/bin/${MY_PN}
 	fperms +x /usr/share/${MY_PN}/${MY_PN}
-	fperms +x /usr/share/${MY_PN}/resources/app/atom.sh
-	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/apm
-	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/npm
+	fperms +x /usr/share/${MY_PN}/resources/app/${MY_PN}.sh
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/node
+	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/npm
+	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/apm
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/node_modules/npm/bin/node-gyp-bin/node-gyp
 	fperms +x /usr/share/${MY_PN}/resources/app/node_modules/symbols-view/vendor/ctags-linux
-	if use debug; then
-		fperms +x /usr/share/${MY_PN}/resources/app/node_modules/github/bin/*
-	fi
-	fperms +x /usr/share/${MY_PN}/resources/app/node_modules/dugite/git/bin/*
-	fperms +x /usr/share/${MY_PN}/resources/app/node_modules/dugite/git/libexec/git-core/*
-	fperms +x /usr/share/${MY_PN}/resources/app/node_modules/dugite/git/libexec/git-core/mergetools/*
+	fperms -R +x /usr/share/${MY_PN}/resources/app/node_modules/github/bin
+	fperms -R +x /usr/share/${MY_PN}/resources/app/node_modules/dugite/git/bin
+	fperms -R +x /usr/share/${MY_PN}/resources/app/node_modules/dugite/git/libexec/git-core
+	fperms -R +x /usr/share/${MY_PN}/resources/app/node_modules/dugite/git/libexec/git-core/mergetools
 
-	make_desktop_entry "/usr/bin/atom %U" "Atom" "atom" \
+	make_desktop_entry "/usr/bin/${MY_PN} %U" "${MY_PN}" "${MY_PN}" \
 		"GNOME;GTK;Utility;TextEditor;Development;" \
-		"GenericName=Text Editor\nMimeType=text/plain;\nStartupNotify=true\nStartupWMClass=Atom"
+		"GenericName=Text Editor\nMimeType=text/plain;\nStartupNotify=true\nStartupWMClass=${MY_PN}"
 }
