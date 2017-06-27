@@ -8,17 +8,16 @@ PYTHON_COMPAT=( python2_7 )
 inherit flag-o-matic python-any-r1 eutils unpacker pax-utils
 
 MY_PN="atom"
-MY_PV="1.18.0"
 
 DESCRIPTION="A hackable text editor for the 21st Century."
 HOMEPAGE="https://atom.io"
 SRC_URI="
-	amd64? ( https://github.com/${MY_PN}/${MY_PN}/releases/download/v${MY_PV}/${MY_PN}-amd64.tar.gz -> ${MY_PN}-${PV}.tar.gz )
+	amd64? ( https://github.com/${MY_PN}/${MY_PN}/releases/download/v${PV}/${MY_PN}-amd64.tar.gz -> ${MY_PN}-${PV}.tar.gz )
 "
 
-RESTRICT="mirror"
+RESTRICT="primaryuri"
 
-KEYWORDS=""
+KEYWORDS="~amd64"
 SLOT="0"
 LICENSE="MIT"
 
@@ -57,7 +56,7 @@ QA_PRESTRIPPED="
 
 ARCH=$(getconf LONG_BIT)
 
-[[ ${ARCH} == "64" ]] && S="${WORKDIR}/${MY_PN}-${MY_PV}-amd64"
+[[ ${ARCH} == "64" ]] && S="${WORKDIR}/${MY_PN}-${PV}-amd64"
 
 pkg_setup() {
 	python-any-r1_pkg_setup
