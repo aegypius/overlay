@@ -1,8 +1,6 @@
 app-admin/sudo
 app-portage/eix
 >app-emulation/docker-1.10
-app-emulation/docker-compose
-app-emulation/docker-machine
 app-misc/tmux
 sys-process/htop
 dev-vcs/hub
