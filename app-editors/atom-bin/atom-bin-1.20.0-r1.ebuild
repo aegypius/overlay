@@ -8,6 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit flag-o-matic python-any-r1 eutils unpacker pax-utils
 
 MY_PN="atom"
+MY_PV=${PV//_beta/-beta}
 
 DESCRIPTION="A hackable text editor for the 21st Century."
 HOMEPAGE="https://atom.io"
@@ -17,8 +18,8 @@ SRC_URI="
 
 RESTRICT="primaryuri"
 
-KEYWORDS="~amd64"
-SLOT="0"
+KEYWORDS="amd64"
+SLOT="stable"
 LICENSE="MIT"
 
 IUSE="-debug"
@@ -56,6 +57,7 @@ QA_PRESTRIPPED="
 
 ARCH=$(getconf LONG_BIT)
 
+[[ ${SLOT} == "beta" ]] && CHANNEL="-beta"
 [[ ${ARCH} == "64" ]] && S="${WORKDIR}/${MY_PN}-${PV}-amd64"
 
 pkg_setup() {

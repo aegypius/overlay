@@ -8,17 +8,18 @@ PYTHON_COMPAT=( python2_7 )
 inherit flag-o-matic python-any-r1 eutils unpacker pax-utils
 
 MY_PN="atom"
+MY_PV=${PV//_beta/-beta}
 
 DESCRIPTION="A hackable text editor for the 21st Century."
 HOMEPAGE="https://atom.io"
 SRC_URI="
-	amd64? ( https://github.com/${MY_PN}/${MY_PN}/releases/download/v${PV}/${MY_PN}-amd64.tar.gz -> ${MY_PN}-${PV}.tar.gz )
+	amd64? ( https://github.com/${MY_PN}/${MY_PN}/releases/download/v${MY_PV}/${MY_PN}-amd64.tar.gz -> ${MY_PN}-${PV}.tar.gz )
 "
 
 RESTRICT="primaryuri"
 
 KEYWORDS="~amd64"
-SLOT="0"
+SLOT="beta"
 LICENSE="MIT"
 
 IUSE="-debug"
@@ -27,6 +28,7 @@ DEPEND="${PYTHON_DEPS}
 	media-fonts/inconsolata
 	!!dev-util/atom-shell
 	!app-editors/atom
+	!app-editors/atom-bin:0
 "
 RDEPEND="${DEPEND}
 	x11-libs/gtk+:2
@@ -50,13 +52,14 @@ QA_PRESTRIPPED="
 	/usr/share/${MY_PN}/libnotify.so.4
 	/usr/share/${MY_PN}/libchromiumcontent.so
 	/usr/share/${MY_PN}/libgcrypt.so.11
-	/usr/share/${MY_PN}/resources/app/node_modules/symbols-view/vendor/ctags-linux
-	/usr/share/${MY_PN}/resources/app/node_modules/dugite/git/libexec/git-core/git-lfs
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/symbols-view/vendor/ctags-linux
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-lfs
 "
 
 ARCH=$(getconf LONG_BIT)
 
-[[ ${ARCH} == "64" ]] && S="${WORKDIR}/${MY_PN}-${PV}-amd64"
+[[ ${SLOT} == "beta" ]] && CHANNEL="-beta"
+[[ ${ARCH} == "64" ]] && S="${WORKDIR}/${MY_PN}${CHANNEL}-${MY_PV}-amd64"
 
 pkg_setup() {
 	python-any-r1_pkg_setup
@@ -87,11 +90,11 @@ src_install() {
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/npm
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/apm
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/node_modules/npm/bin/node-gyp-bin/node-gyp
-	fperms +x /usr/share/${MY_PN}/resources/app/node_modules/symbols-view/vendor/ctags-linux
-	fperms -R +x /usr/share/${MY_PN}/resources/app/node_modules/github/bin
-	fperms -R +x /usr/share/${MY_PN}/resources/app/node_modules/dugite/git/bin
-	fperms -R +x /usr/share/${MY_PN}/resources/app/node_modules/dugite/git/libexec/git-core
-	fperms -R +x /usr/share/${MY_PN}/resources/app/node_modules/dugite/git/libexec/git-core/mergetools
+	fperms +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/symbols-view/vendor/ctags-linux
+	fperms -R +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/github/bin
+	fperms -R +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/bin
+	fperms -R +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core
+	fperms -R +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/mergetools
 
 	make_desktop_entry "/usr/bin/${MY_PN} %U" "${MY_PN}" "${MY_PN}" \
 		"GNOME;GTK;Utility;TextEditor;Development;" \
