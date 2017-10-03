@@ -1,0 +1,22 @@
+Title: Introducing app-editors/atom-bin slots
+Author: Nicolas LAURENT <github@aegypius.com>
+Content-Type: text/plain
+Poster: 2017-10-03
+Revision: 1
+News-Item-Format: 1.0
+Display-If-Installed: <app-editors/atom-1.20.0-r1
+
+Starting with Atom 1.21.0-beta0, I will introduce a beta slot for those who want
+to test atom releases earlier.
+
+For now you will have to slots:
+
+  - The `stable` slot is now the default one, the ~amd64 flag has been remove
+  - The `beta` slot will have a an ~amd64 flag and will feature the next Atom release
+
+If you want to stay in the stable channel, you can safely remove the
+app-editors/atom-bin from your package.keywords file.
+
+Please let me know if you have any unexpected behavior.
+
+You can open issues to react to this on https://github.com/aegypius/overlay/issues
