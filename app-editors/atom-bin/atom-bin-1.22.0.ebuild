@@ -55,13 +55,18 @@ QA_PRESTRIPPED="
 	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-lfs
 "
 
-ARCH=$(getconf LONG_BIT)
-
-[[ ${SLOT} == "beta" ]] && CHANNEL="-beta"
-[[ ${ARCH} == "64" ]] && S="${WORKDIR}/${MY_PN}${CHANNEL}-${MY_PV}-amd64"
 
 pkg_setup() {
 	python-any-r1_pkg_setup
+}
+
+src_unpack() {
+	unpack ${A}
+
+	ARCH=$(getconf LONG_BIT)
+
+	[[ ${SLOT} == "beta" ]] && CHANNEL="-beta"
+	[[ ${ARCH} == "64" ]] && mv "${WORKDIR}/${MY_PN}${CHANNEL}-${MY_PV}-amd64" "${WORKDIR}/${PN}-${PV}"
 }
 
 src_prepare() {
