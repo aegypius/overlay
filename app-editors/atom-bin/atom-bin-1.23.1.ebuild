@@ -55,7 +55,6 @@ QA_PRESTRIPPED="
 	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-lfs
 "
 
-
 pkg_setup() {
 	python-any-r1_pkg_setup
 }
