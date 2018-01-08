@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -32,6 +32,7 @@ DEPEND="${PYTHON_DEPS}
 RDEPEND="${DEPEND}
 	x11-libs/gtk+:2
 	x11-libs/libnotify
+	x11-libs/libXScrnSaver
 	gnome-base/libgnome-keyring
 	dev-libs/nss
 	dev-libs/nspr
