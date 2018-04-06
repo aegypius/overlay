@@ -7,3 +7,6 @@ dev-vcs/hub
 media-sound/spotify
 net-dns/dnsmasq
 app-shells/bash-completion
+
+www-client/google-chrome
+www-plugins/chrome-binary-plugins

@@ -1,4 +1,4 @@
 x11-base/xorg-drivers
 >=gnome-base/gnome-3.18.0
-www-client/chromium
-www-plugins/chrome-binary-plugins
+# ( www-client/chromium || www-client/google-chrome )
+# www-plugins/chrome-binary-plugins
