@@ -4,9 +4,7 @@ app-portage/eix
 app-misc/tmux
 sys-process/htop
 dev-vcs/hub
-media-sound/spotify
 net-dns/dnsmasq
 app-shells/bash-completion
-
 www-client/google-chrome
 www-plugins/chrome-binary-plugins
