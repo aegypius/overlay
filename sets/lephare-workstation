@@ -5,5 +5,5 @@ app-office/libreoffice-bin
 dev-db/mariadb
 net-fs/autofs
 net-misc/rdesktop
-net-misc/networkmanager-openvpn
-net-misc/networkmanager-pptp
+net-vpn/networkmanager-openvpn
+net-vpn/networkmanager-pptp
