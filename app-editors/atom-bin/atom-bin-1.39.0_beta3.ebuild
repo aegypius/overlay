@@ -52,8 +52,29 @@ QA_PRESTRIPPED="
 	/usr/share/${MY_PN}/libnotify.so.4
 	/usr/share/${MY_PN}/libchromiumcontent.so
 	/usr/share/${MY_PN}/libgcrypt.so.11
+	/usr/share/${MY_PN}/resources/app/apm/node_modules/keytar/build/Release/keytar.node
 	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/symbols-view/vendor/ctags-linux
 	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-lfs
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-imap-send
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-daemon
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-credential-store
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-credential-cache--daemon
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-http-backend
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-fast-import
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-shell
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-sh-i18n--envsubst
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-http-push
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-credential-cache
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-http-fetch
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/git-remote-http
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/bin/git
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/tree-sitter-bash/build/Release/tree_sitter_bash_binding.node
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/keytar/build/Release/keytar.node
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/tree-sitter-ruby/build/Release/tree_sitter_ruby_binding.node
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/@atom/fuzzy-native/build/Release/fuzzy-native.node
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/@atom/watcher/build/Release/watcher.node
+	/usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/vscode-ripgrep/bin/rg
 "
 
 pkg_setup() {
@@ -79,7 +100,7 @@ src_install() {
 	insinto /usr/share/${MY_PN}
 	doins -r .
 	doicon ${MY_PN}.png
-	insinto /usr/share/doc/${MY_PN}
+	insinto /usr/share/doc/${PN}-${PV}
 	newins resources/LICENSE.md copyright
 	newbin "${FILESDIR}/${PN}" ${MY_PN}
 	insinto /usr/share/lintian/overrides
@@ -97,6 +118,7 @@ src_install() {
 	fperms +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/symbols-view/vendor/ctags-linux
 	fperms -R +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/github/bin
 	fperms -R +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/bin
+	fperms -R +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/vscode-ripgrep/bin
 	fperms -R +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core
 	fperms -R +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/dugite/git/libexec/git-core/mergetools
 
