@@ -25,6 +25,7 @@ IUSE="-debug"
 
 DEPEND="${PYTHON_DEPS}
 	media-fonts/inconsolata
+	dev-libs/openssl-compat:1.0.0
 	!!dev-util/atom-shell
 	!app-editors/atom
 	!app-editors/atom-bin:0
