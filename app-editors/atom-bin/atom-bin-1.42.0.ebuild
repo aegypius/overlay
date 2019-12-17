@@ -115,6 +115,7 @@ src_install() {
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/node
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/npm
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/bin/apm
+	fperms +x /usr/share/${MY_PN}/resources/app/apm/node_modules/.bin/npm
 	fperms +x /usr/share/${MY_PN}/resources/app/apm/node_modules/npm/bin/node-gyp-bin/node-gyp
 	fperms +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/symbols-view/vendor/ctags-linux
 	fperms -R +x /usr/share/${MY_PN}/resources/app.asar.unpacked/node_modules/github/bin
