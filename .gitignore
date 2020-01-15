@@ -8,3 +8,4 @@ _builds
 _projects
 _steps
 .wercker
+metadata/md5-cache
