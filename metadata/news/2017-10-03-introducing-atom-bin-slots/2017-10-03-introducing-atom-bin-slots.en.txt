@@ -1,8 +1,8 @@
 Title: Introducing app-editors/atom-bin slots
 Author: Nicolas LAURENT <github@aegypius.com>
 Content-Type: text/plain
-Poster: 2017-10-03
-Revision: 1
+Posted: 2017-10-03
+Revision: 2
 News-Item-Format: 1.0
 Display-If-Installed: <app-editors/atom-1.20.0-r1
 
