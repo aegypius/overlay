@@ -1,8 +1,8 @@
 Title: Getting ready for atom 1.0 release
 Author: Nicolas LAURENT <github@aegypius.com>
 Content-Type: text/plain
-Poster: 2015-05-28
-Revision: 1
+Posted: 2015-05-28
+Revision: 2
 News-Item-Format: 1.0
 Display-If-Installed: <app-editors/atom-1.0
 
